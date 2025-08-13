@@ -22,7 +22,7 @@ export default function Home() {
               <div className="text-center md:text-left">
                 <h2 className="text-2xl md:text-4xl font-bold mb-4">🚧 Site Under Development</h2>
                 <p className="text-gray-700 text-lg md:text-xl">
-                  We're working hard to bring you the best experience.<br />
+                  We are working hard to bring you the best experience.<br />
                   Please check back in <strong>10 days</strong>.
                 </p>
               </div>
