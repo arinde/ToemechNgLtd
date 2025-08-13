@@ -1,16 +1,9 @@
 import Image from "next/image";
 
-import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Home() {
-  const [showModal, setShowModal] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setShowModal(false), 5000);
-    return () => clearTimeout(timer);
-  }, []);
-
+  
   const modalVariants = {
     hidden: { opacity: 0, scale: 0.85 },
     visible: {
@@ -27,7 +20,6 @@ export default function Home() {
 
   return (
     <AnimatePresence>
-      {showModal && (
         <motion.div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
           initial={{ opacity: 0 }}
@@ -62,7 +54,6 @@ export default function Home() {
             </div>
           </motion.div>
         </motion.div>
-      )}
     </AnimatePresence>
   );
 }
