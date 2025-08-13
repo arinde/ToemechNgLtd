@@ -10,7 +10,7 @@ export default function Home() {
           >
             <div className="flex flex-col md:flex-row items-center gap-6">
               {/* Image */}
-              <Image
+              <img
                 src="/development.jfif" // Replace this path
                 alt="Under Development"
                 className="w-32 md:w-64"
