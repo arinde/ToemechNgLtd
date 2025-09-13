@@ -1,4 +1,5 @@
-
+"use client"
+import Image from "next/image";
 
 export default function WorkInProgress() {
   
@@ -11,7 +12,7 @@ export default function WorkInProgress() {
           >
             <div className="flex flex-col md:flex-row items-center gap-6">
               {/* Image */}
-              <img
+              <Image
                 src="/development.jfif"
                 alt="Under Development"
                 className="w-32 md:w-64"
