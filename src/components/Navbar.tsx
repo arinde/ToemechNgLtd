@@ -11,7 +11,7 @@ export default function Navbar() {
     return(
         <nav className="bg-gray-500 text-white font-serif backdrop-blur-sm">
             <div className="flex md:justify-around justify-between mx-10 md:mx-auto items-center h-16">
-                <Image src="/Logo.jpg" alt="toemech" width={56} height={56} />
+                <Image src="/Logo.png" alt="toemech" width={56} height={56} />
 
                 <ul className="md:flex hidden space-x-4">
                     <li>About Us</li>

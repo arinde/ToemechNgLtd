@@ -1,5 +1,6 @@
 
 "use client";
+import Loading from "./loading";
 import Link from "next/link"
 import Image from "next/image";
 import { useState, useEffect } from "react";
@@ -196,14 +197,6 @@ export default function DashboardPage() {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen text-xl">
-        Loading dashboard data...
-      </div>
-    );
-  }
-
   const handleAddProjectClick = () => {
     setIsAddProjectModalOpen(true);
   };
@@ -217,6 +210,13 @@ export default function DashboardPage() {
     refreshData();
     handleCloseAddProjectModal();
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) return <Loading />;
 
   return (
     <div className="p-8">
