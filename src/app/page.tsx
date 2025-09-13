@@ -5,7 +5,7 @@ export default function Home() {
 
   const router = useRouter();
     return(
-      router.push('/dashboard')
+      router.push('/login')
   )
   
 }

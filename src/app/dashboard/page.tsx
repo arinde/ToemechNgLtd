@@ -1,24 +1,28 @@
-
 "use client";
 import Loading from "./loading";
-import Link from "next/link"
+import { useAuth } from "@/providers/AuthContext";
+import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { getCollectionCount, 
-          getAllStaff, 
-          deleteStaff, 
-          getAllProjects, 
-          deleteProject, 
-          getAllClients, 
-          deleteClient, 
-         /* addClient */ } from "@/utils/firestore";
+import {
+  getCollectionCount,
+  getAllStaff,
+  deleteStaff,
+  getAllProjects,
+  deleteProject,
+  getAllClients,
+  deleteClient,
+} from "@/utils/firestore";
 import { Trash, Edit } from "lucide-react";
-import { toast} from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import EditStaffForm from "@/components/EditStaffForm";
 import AddProjectForm from "@/components/AddProjectForm";
 import EditProjectForm from "@/components/EditProjectForm";
 import AddClientForm from "@/components/AddClientForm";
 import EditClientForm from "@/components/EditClientForm";
+import { useRouter } from "next/navigation";
+import { signOut } from "firebase/auth";
+import { auth } from "@/lib/firebase";
 
 export type EmployeeWithId = {
     id: string;
@@ -52,13 +56,17 @@ type ProjectWithId = {
 };
 
 export default function DashboardPage() {
-  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
+  const { user, loading: authLoading } = useAuth();
+  const router = useRouter();
+
   const [employeesCount, setEmployeesCount] = useState<number | null>(null);
   const [projectsCount, setProjectsCount] = useState<number | null>(null);
   const [clientsCount, setClientsCount] = useState<number | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [dataLoading, setDataLoading] = useState(true);
+
   const [employees, setEmployees] = useState<EmployeeWithId[]>([]);
   const [selectedEmployee, setSelectedEmployee] = useState<EmployeeWithId | null>(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [projects, setProjects] = useState<ProjectWithId[]>([]);
   const [isAddProjectModalOpen, setIsAddProjectModalOpen] = useState(false);
   const [isEditProjectModalOpen, setIsEditProjectModalOpen] = useState(false);
@@ -68,45 +76,52 @@ export default function DashboardPage() {
   const [isEditClientModalOpen, setIsEditClientModalOpen] = useState(false);
   const [selectedClient, setSelectedClient] = useState<ClientWithId | null>(null);
 
+  useEffect(() => {
+    if (!authLoading) {
+      if (!user) {
+        router.push("/login");
+      } else {
+        refreshData();
+      }
+    }
+  }, [user, authLoading, router]);
+
   const refreshData = async () => {
-    setLoading(true);
+    setDataLoading(true);
     try {
-      // Fetch counts
-      const staffCount = await getCollectionCount("employees");
-      const projectCount = await getCollectionCount("projects");
-      const clientCount = await getCollectionCount("clients");
+      const [staffCount, projectCount, clientCount, staffList, projectsList, clientsList] = await Promise.all([
+        getCollectionCount("employees"),
+        getCollectionCount("projects"),
+        getCollectionCount("clients"),
+        getAllStaff(),
+        getAllProjects(),
+        getAllClients(),
+      ]);
+
       setEmployeesCount(staffCount);
       setProjectsCount(projectCount);
       setClientsCount(clientCount);
-
-      // Fetch lists
-      const staffList = await getAllStaff();
       setEmployees(staffList as EmployeeWithId[]);
-      const projectsList = await getAllProjects();
       setProjects(projectsList as ProjectWithId[]);
-      const clientsList = await getAllClients(); 
-      setClients(clientsList as ClientWithId[]); 
+      setClients(clientsList as ClientWithId[]);
     } catch (error) {
       console.error("Failed to fetch dashboard data:", error);
       toast.error("Failed to load dashboard data.");
     } finally {
-      setLoading(false);
+      setDataLoading(false);
     }
   };
 
-  useEffect(() => {
-    refreshData();
-  }, []);
+  if (authLoading || dataLoading) {
+    return <Loading />;
+  }
 
-  //handle delete staff
   const handleDeleteStaff = async (id: string, name: string) => {
     if (window.confirm(`Are you sure you want to delete ${name}?`)) {
       try {
         await deleteStaff(id);
         toast.success(`${name} deleted successfully!`);
         refreshData();
-        // Update the state to reflect the deletion without a full page reload
-        setEmployees(employees.filter((emp) => emp.id !== id));
       } catch (error) {
         console.error("Error deleting staff:", error);
         toast.error("Failed to delete staff.");
@@ -120,7 +135,7 @@ export default function DashboardPage() {
   };
 
   const handleUpdateSuccess = () => {
-    refreshData(); // Refresh the list after a successful update
+    refreshData();
   };
 
   const handleCloseModal = () => {
@@ -130,18 +145,18 @@ export default function DashboardPage() {
 
   const handleDeleteProject = async (id: string, title: string) => {
     if (window.confirm(`Are you sure you want to delete the project: ${title}?`)) {
-        try {
-            await deleteProject(id);
-            toast.success("Project deleted successfully!");
-            refreshData(); // Refresh the data to update the list
-        } catch (error) {
-            console.error("Error deleting project:", error);
-            toast.error("Failed to delete project.");
-        }
+      try {
+        await deleteProject(id);
+        toast.success("Project deleted successfully!");
+        refreshData();
+      } catch (error) {
+        console.error("Error deleting project:", error);
+        toast.error("Failed to delete project.");
+      }
     }
   };
 
-   const handleEditProjectClick = (project: ProjectWithId) => {
+  const handleEditProjectClick = (project: ProjectWithId) => {
     setSelectedProject(project);
     setIsEditProjectModalOpen(true);
   };
@@ -205,21 +220,21 @@ export default function DashboardPage() {
     setIsAddProjectModalOpen(false);
   };
   
-  // Pass refreshData as the success callback
   const handleAddProjectSuccess = () => {
     refreshData();
     handleCloseAddProjectModal();
   };
 
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 3000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (loading) return <Loading />;
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+    } catch (err) {
+      console.error("Logout failed:", err);
+    }
+  };
 
   return (
-    <div className="p-8">
+    <div className="p-8 mt-16">
       <h1 className="text-4xl font-bold mb-8">Admin Dashboard</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -227,10 +242,11 @@ export default function DashboardPage() {
         <div className="bg-white p-6 rounded-lg shadow-md">
           <div className="flex justify-between items-center">
             <h2 className="text-2xl font-semibold text-gray-700">Employees</h2>
-             <Link href="/staffReg">
-                <button className="px-3 py-1 bg-blue-600 text-white rounded-md">
-                    Add
-                </button>
+            <button onClick={handleLogout}> Signout</button>
+            <Link href="/staffReg">
+              <button className="px-3 py-1 bg-blue-600 text-white rounded-md">
+                Add
+              </button>
             </Link>
           </div>
           <p className="text-5xl font-extrabold text-blue-600 mt-4">
@@ -257,7 +273,7 @@ export default function DashboardPage() {
         <div className="bg-white p-6 rounded-lg shadow-md">
           <div className="flex justify-between items-center">
             <h2 className="text-2xl font-semibold text-gray-700">Clients</h2>
-           <button onClick={handleAddClientClick} className="px-3 py-1 bg-blue-600 text-white rounded-md">
+            <button onClick={handleAddClientClick} className="px-3 py-1 bg-blue-600 text-white rounded-md">
               Add
             </button>
           </div>
@@ -313,7 +329,7 @@ export default function DashboardPage() {
                     {project.images && project.images.length > 0 && (
                         <div className="relative w-full h-48">
                         <Image
-                            src={project.images[0]} // Displaying the first image
+                            src={project.images[0]}
                             alt={project.title}
                             fill
                             quality={100}
@@ -432,7 +448,6 @@ export default function DashboardPage() {
         </div>
       )}
 
-      {/* The Edit Client Modal */}
       {isEditClientModalOpen && selectedClient && (
         <EditClientForm
           client={selectedClient}
@@ -440,7 +455,6 @@ export default function DashboardPage() {
           onUpdateSuccess={handleUpdateClientSuccess}
         />
       )}
-
     </div>
   );
 }
