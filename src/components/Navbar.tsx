@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import { useState } from "react"
+import Link from "next/link"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -10,7 +11,7 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-white/20 backdrop-blur-md border-b border-white/30 shadow-md">
       <div className="flex md:justify-around justify-between mx-10 md:mx-auto items-center h-16">
-        <Image src="/Logo.png" alt="toemech" width={80} height={80} />
+        <Link href="/"><Image src="/Logo.png" alt="toemech" width={80} height={80} /></Link>
 
         <ul className="md:flex hidden space-x-6 text-gray-900 font-medium">
           <li className="hover:text-blue-600 transition">About Us</li>
@@ -18,6 +19,7 @@ export default function Navbar() {
           <li className="hover:text-blue-600 transition">Team</li>
           <li className="hover:text-blue-600 transition">Blog</li>
           <li className="hover:text-blue-600 transition">Contact</li>
+          <Link href="/login">Login</Link>
         </ul>
 
         {/* Hamburger/X Button */}

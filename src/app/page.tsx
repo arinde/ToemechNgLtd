@@ -1,11 +1,12 @@
 "use client";
-import { useRouter } from "next/navigation";
+//import { useRouter } from "next/navigation";
 
 export default function Home() {
 
-  const router = useRouter();
+  //const router = useRouter();
     return(
-      router.push('/login')
+      //router.push('/login')
+      <h1 className="mt-24">Home</h1>
   )
   
 }

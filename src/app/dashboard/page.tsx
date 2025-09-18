@@ -429,14 +429,14 @@ export default function DashboardPage() {
             >
                 &times;
             </button>
-            <AddProjectForm onAddSuccess={handleAddProjectSuccess} />
+            <AddProjectForm onAddSuccess={handleAddProjectSuccess} onClose={handleCloseAddProjectModal} />
           </div>
         </div>
       )}
 
       {isAddClientModalOpen && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center p-4">
-          <div className="relative bg-white p-8 rounded-lg shadow-xl w-full max-w-lg">
+        <div className=" fixed inset-0 bg-gray-400 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center p-4">
+          <div className="relative bg-white  p-8 rounded-lg shadow-xl w-full max-w-lg">
             <button
                 className="absolute top-3 right-3 text-gray-500 hover:text-gray-800"
                 onClick={handleCloseAddClientModal}
