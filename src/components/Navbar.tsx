@@ -13,7 +13,7 @@ export default function Navbar() {
       <div className="flex md:justify-around justify-between mx-10 md:mx-auto items-center h-16">
         <Link href="/"><Image src="/Logo.png" alt="toemech" width={80} height={80} /></Link>
 
-        <ul className="md:flex hidden space-x-6 text-gray-900 font-medium">
+        <ul className="md:flex hidden space-x-6 text-white font-medium">
           <li className="hover:text-blue-600 transition">About Us</li>
           <li className="hover:text-blue-600 transition">Services</li>
           <li className="hover:text-blue-600 transition">Team</li>

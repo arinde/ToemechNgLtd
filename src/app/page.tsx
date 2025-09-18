@@ -1,12 +1,15 @@
 "use client";
-//import { useRouter } from "next/navigation";
+
+import HeroSection from "@/components/Hero";
 
 export default function Home() {
 
   //const router = useRouter();
     return(
-      //router.push('/login')
-      <h1 className="mt-24">Home</h1>
+      <>
+        <HeroSection />
+      </>
+      
   )
   
 }
