@@ -52,7 +52,7 @@ export default function AddClientForm({ onAddSuccess }: AddClientFormProps) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full mt-44 max-w-md mx-auto space-y-5 rounded-2xl bg-white/90 backdrop-blur-lg shadow-xl border border-gray-200 p-6"
+      className="w-full max-w-md mx-auto space-y-5 rounded-2xl bg-white/90 backdrop-blur-lg shadow-xl border border-gray-200 p-6"
     >
       {/* Title */}
       <h2 className="text-2xl font-semibold text-gray-800 text-center">

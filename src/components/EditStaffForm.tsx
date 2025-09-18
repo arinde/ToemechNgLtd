@@ -4,6 +4,7 @@
 
 import { useState} from "react";
 import { toast } from "react-hot-toast";
+import { X } from "lucide-react"
 import { updateStaff } from "@/utils/firestore";
 
 interface staffType {
@@ -68,15 +69,15 @@ export default function EditStaffForm({ employee, onClose, onUpdateSuccess }: Ed
     };
 
     return (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center">
+        <div className="fixed mt-12 inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center">
             <div className="relative bg-white p-8 rounded-lg shadow-xl w-full max-w-md">
                 <button
-                    className="absolute top-3 right-3 text-gray-500 hover:text-gray-800"
+                    className="absolute top-3 right-3 text-grey-700 hover:text-gray-800 border-0 bg-red-100 rounded-2xl p-1"
                     onClick={onClose}
                 >
-                    &times;
+                    <X className="text-red-700" />
                 </button>
-                <h2 className="text-2xl font-bold mb-4">Edit {employee.name}</h2>
+                <h2 className="text-2xl font-bold mb-4">Edit Profile </h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <input type="text" name="name" placeholder="Name" value={form.name} onChange={handleChange} className="w-full border p-2 rounded" />
                     <input type="text" name="role" placeholder="Role" value={form.role} onChange={handleChange} className="w-full border p-2 rounded" />

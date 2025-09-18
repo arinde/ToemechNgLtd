@@ -76,7 +76,7 @@ export default function AddProjectForm({ onAddSuccess, onClose }: AddProjectForm
   };
 
   return (
-    <div className="mt-64 fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm p-4">
       <div className="max-w-6xl w-full bg-white p-6 md:p-10 rounded-xl shadow-2xl border border-gray-200 relative max-h-[90vh] overflow-y-auto">
         <button
           onClick={onClose}

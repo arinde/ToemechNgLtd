@@ -23,6 +23,7 @@ import EditClientForm from "@/components/EditClientForm";
 import { useRouter } from "next/navigation";
 import { signOut } from "firebase/auth";
 import { auth } from "@/lib/firebase";
+import { X } from "lucide-react"
 
 export type EmployeeWithId = {
     id: string;
@@ -421,13 +422,13 @@ export default function DashboardPage() {
       )}
 
       {isAddProjectModalOpen && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center p-4">
-          <div className="relative bg-white p-8 rounded-lg shadow-xl w-full max-w-lg">
+        <div className="fixed inset-0 bg-gray-400 z-50 bg-opacity-50 overflow-y-auto w-full flex items-center justify-center p-4">
+          <div className="relative bg-white p-8  mt-24 rounded-lg shadow-xl w-full max-w-lg">
             <button
-                className="absolute top-3 right-3 text-gray-500 hover:text-gray-800"
+                className="absolute top-3 right-3 text-red-700 hover:text-gray-800 cursor-pointer"
                 onClick={handleCloseAddProjectModal}
             >
-                &times;
+                <X />
             </button>
             <AddProjectForm onAddSuccess={handleAddProjectSuccess} onClose={handleCloseAddProjectModal} />
           </div>
@@ -435,13 +436,13 @@ export default function DashboardPage() {
       )}
 
       {isAddClientModalOpen && (
-        <div className=" fixed inset-0 bg-gray-400 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center p-4">
-          <div className="relative bg-white  p-8 rounded-lg shadow-xl w-full max-w-lg">
+        <div className=" fixed inset-0 bg-gray-400 bg-opacity-50 overflow-y-auto z-50  w-full flex items-center justify-center p-4">
+          <div className="relative bg-white mt-24  p-8 rounded-lg shadow-xl w-full max-w-lg">
             <button
-                className="absolute top-3 right-3 text-gray-500 hover:text-gray-800"
+                className="absolute top-3 right-3 text-red-700 hover:text-gray-800 cursor-pointer"
                 onClick={handleCloseAddClientModal}
             >
-                &times;
+                <X />
             </button>
             <AddClientForm onAddSuccess={handleAddClientSuccess} />
           </div>
