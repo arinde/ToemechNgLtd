@@ -75,7 +75,7 @@ const TomechHeroSection = () => {
           <div ref={headingRef} className="mb-6">
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
               <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent">
-                TOMECH NIG LTD
+                TOEMECH NIG LTD
               </span>
             </h1>
             <div className="mt-4 h-1 w-24 bg-gradient-to-r from-blue-500 to-cyan-400 mx-auto rounded-full"></div>
