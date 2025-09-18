@@ -12,7 +12,7 @@ export default function Navbar() {
     <nav className="bg-none text-black items-center fixed z-50 w-full backdrop-blur-sm">
       <div className='flex items-center justify-center'>
       <div className="bg-gray-100 mt-6 py-2 md:w-[70%] w-[90%] rounded-full  md:mx-auto md:px-4 px-3 sm:px-6 lg:px-8 flex md:justify-evenly justify-between items-center h-16">
-        <Link href="/"><Image src="/Logo.png" alt="toemech" width={80} height={80} /></Link>
+        <Link href="/"><Image src="/Logo.png" alt="toemech" width={60} height={60} /></Link>
 
         <ul className="md:flex hidden space-x-6 text-grey-800 font-medium">
           <li className="hover:text-blue-600 transition">About Us</li>
@@ -64,6 +64,7 @@ export default function Navbar() {
             <li className="hover:text-blue-600 transition">Team</li>
             <li className="hover:text-blue-600 transition">Blog</li>
             <li className="hover:text-blue-600 transition">Contact</li>
+            <Link href="/login">Login</Link>
           </ul>
         </div>
       )}
