@@ -42,7 +42,7 @@ export default function AboutSection() {
         <div className="grid grid-cols-2 gap-4">
           <div className="relative w-full h-56 md:h-64 rounded-lg overflow-hidden shadow-md">
             <Image
-              src="/Services.jpg"
+              src="/toemech1.jpeg"
               alt="Industrial Engineering"
               fill
               className="object-cover"
@@ -50,7 +50,7 @@ export default function AboutSection() {
           </div>
           <div className="relative w-full h-72 md:h-80 rounded-lg overflow-hidden shadow-md">
             <Image
-              src="/Services.jpg"
+              src="/toemech2.jpeg"
               alt="Electrical Works"
               fill
               className="object-cover"
@@ -58,7 +58,7 @@ export default function AboutSection() {
           </div>
           <div className="relative w-full h-72 md:h-80 rounded-lg overflow-hidden shadow-md">
             <Image
-              src="/Services.jpg"
+              src="/toemech3.jpeg"
               alt="Engineering Team"
               fill
               className="object-cover"
@@ -66,7 +66,7 @@ export default function AboutSection() {
           </div>
           <div className="relative w-full h-56 md:h-64 rounded-lg overflow-hidden shadow-md">
             <Image
-              src="/Services.jpg"
+              src="/toemech4.jpeg"
               alt="Engineering Materials"
               fill
               className="object-cover"

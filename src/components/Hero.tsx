@@ -46,7 +46,7 @@ const TomechHeroSection = () => {
             poster="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
           >
             {/* Replace with your Cloudinary video URL */}
-            <source src="https://res.cloudinary.com/ddinnivn2/video/upload/v1752683126/79ec879703c351ae88c776dbad0fceac_1_paubpf.mp4" type="video/mp4" />
+            <source src="https://res.cloudinary.com/ddinnivn2/video/upload/v1758375431/From_KlickPin_CF_High_voltage_power_station_View_from_flying_drone_Wide_angle_high_voltage_substation_with_tall_py_Video___Power_station_Wide_angle_High_voltage_i0rqtl.mp4" type="video/mp4" />
             {/* Fallback for browsers that don't support video */}
           </video>
         </div>

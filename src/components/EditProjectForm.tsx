@@ -14,6 +14,7 @@ interface projectType  {
     description: string;
     client: string;
     status: string;
+    location: string;
     images?: string[];
 }
 type EditFormProps = {
@@ -27,6 +28,7 @@ export default function EditProjectForm({ project, onClose, onUpdateSuccess }: E
         title: project.title || "",
         description: project.description || "",
         client: project.client || "",
+        location: project.location || "",
         status: project.status || "ongoing",
     });
     const [images, setImages] = useState<string[]>(project.images || []);
@@ -54,6 +56,7 @@ export default function EditProjectForm({ project, onClose, onUpdateSuccess }: E
         const updatedData = {
             title: form.title,
             description: form.description,
+            location: form.location,
             client: form.client,
             status: form.status as "ongoing" | "completed",
             images,
@@ -86,6 +89,7 @@ export default function EditProjectForm({ project, onClose, onUpdateSuccess }: E
                     <input type="text" name="title" placeholder="Title" value={form.title} onChange={handleChange} className="w-full border p-2 rounded" />
                     <textarea name="description" placeholder="Description" value={form.description} onChange={handleChange} className="w-full border p-2 rounded" rows={4} />
                     <input type="text" name="client" placeholder="Client Name" value={form.client} onChange={handleChange} className="w-full border p-2 rounded" />
+                    <input type="text" name="location" placeholder="Location" value={form.location} onChange={handleChange} className="w-full border p-2 rounded" />
                     <select name="status" value={form.status} onChange={handleChange} className="w-full border p-2 rounded">
                         <option value="ongoing">Ongoing</option>
                         <option value="completed">Completed</option>
