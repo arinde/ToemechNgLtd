@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { Draggable } from "gsap/Draggable";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 
 gsap.registerPlugin(Draggable, ScrollTrigger);
 
@@ -12,7 +13,7 @@ const testimonials = [
     name: "Sandeep Mali",
     role: "Project Manager, Reliance Chemical Product Limited",
     comment:
-      "Westmat Nigeria delivered our structural welding and pipework with professionalism, meeting our tight deadlines and quality standards.",
+      "Toemech Nigeria delivered our structural welding and pipework with professionalism, meeting our tight deadlines and quality standards.",
     image: "/Services.jpg",
   },
   {
@@ -45,17 +46,22 @@ export default function Testimonial() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Entrance animation when section is in view
-      gsap.from(".testimonial-card", {
-        opacity: 0,
-        y: 40,
-        stagger: 0.15,
-        duration: 0.8,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 85%",
-        },
-      });
+      // Use fromTo() to ensure the elements animate from opacity: 0 to opacity: 1
+      gsap.fromTo(
+        ".testimonial-card",
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.15,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 85%",
+          },
+        }
+      );
 
       // Make the track draggable horizontally
       if (trackRef.current && containerRef.current) {
@@ -102,16 +108,19 @@ export default function Testimonial() {
           {testimonials.map((item, i) => (
             <div
               key={i}
+              // The testimonial-card class now has no initial opacity class
               className="testimonial-card bg-white rounded-xl shadow-md border border-gray-200 w-[280px] md:w-[300px] p-6 flex flex-col justify-between hover:shadow-lg transition-all"
             >
               <p className="text-md md:text-lg text-gray-600 mb-4 leading-relaxed">
                 “{item.comment}”
               </p>
               <div className="flex items-center gap-4 mt-auto">
-                <img
+                <Image
                   src={item.image}
                   alt={item.name}
                   className="w-12 h-12 rounded-full object-cover border border-blue-600"
+                  width={40}
+                  height={40}
                 />
                 <div>
                   <h4 className="text-sm font-semibold text-blue-600">

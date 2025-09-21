@@ -11,6 +11,7 @@ interface staffType {
     name: string;
     role: string;
     bio: string;
+    phone: string;
     
     socials: {
         twitter?: string;
@@ -30,6 +31,7 @@ export default function EditStaffForm({ employee, onClose, onUpdateSuccess }: Ed
         name: employee.name || "",
         role: employee.role || "",
         bio: employee.bio || "",
+        phone: employee.phone || "",
         twitter: employee.socials?.twitter || "",
         linkedin: employee.socials?.linkedin || "",
         email: employee.socials?.email || "", // Assuming you've corrected this field
@@ -48,6 +50,7 @@ export default function EditStaffForm({ employee, onClose, onUpdateSuccess }: Ed
             name: form.name,
             role: form.role,
             bio: form.bio,
+            phone: form.phone,
             socials: {
                 twitter: form.twitter,
                 linkedin: form.linkedin,
@@ -83,7 +86,7 @@ export default function EditStaffForm({ employee, onClose, onUpdateSuccess }: Ed
                     <input type="text" name="role" placeholder="Role" value={form.role} onChange={handleChange} className="w-full border p-2 rounded" />
                     <textarea name="bio" placeholder="Bio" value={form.bio} onChange={handleChange} className="w-full border p-2 rounded" />
                     <input type="text" name="twitter" placeholder="Twitter" value={form.twitter} onChange={handleChange} className="w-full border p-2 rounded" />
-                    <input type="text" name="linkedin" placeholder="LinkedIn" value={form.linkedin} onChange={handleChange} className="w-full border p-2 rounded" />
+                    <input type="text" name="phone" placeholder="Phone No" value={form.phone} onChange={handleChange} className="w-full border p-2 rounded" />
                     <input type="email" name="email" placeholder="Email" value={form.email} onChange={handleChange} className="w-full border p-2 rounded" />
 
                     <button type="submit" className="w-full px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors" disabled={loading}>

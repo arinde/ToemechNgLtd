@@ -22,7 +22,7 @@ export default function Project() {
     try {
       const projectList = await getAllProjects();
 
-      const fullProjects: ProjectWithId[] = projectList.map((project: any) => ({
+      const fullProjects: ProjectWithId[] = projectList.map((project) => ({
         id: project.id,
         title: project.title ?? "",
         company: project.company ?? "",

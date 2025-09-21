@@ -31,6 +31,7 @@ export type EmployeeWithId = {
     role: string;
     imageUrl: string;
     bio: string;
+    phone: string;
     socials: { twitter?: string; linkedin?: string; email?: string };
 
 }

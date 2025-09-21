@@ -15,7 +15,8 @@ export default function Staff() {
     bio: "",
     twitter: "", 
     linkedin: "", 
-    email: ""
+    email: "",
+    phone: "",
   })
   const [imageUrl, setImageUrl] = useState<string>("")
   const [loading, setLoading] = useState<boolean>(false)
@@ -53,7 +54,8 @@ export default function Staff() {
         bio: "",
         twitter: "", 
         linkedin: "", 
-        email: ""
+        email: "",
+        phone: "",
       })
       setImageUrl("")
       router.push('/dashboard')
@@ -116,7 +118,7 @@ export default function Staff() {
             </label>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <input type="text" name="twitter" placeholder="Twitter URL" value={form.twitter} onChange={handleChange} className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" />
-              <input type="text" name="linkedin" placeholder="LinkedIn URL" value={form.linkedin} onChange={handleChange} className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" />
+              <input type="text" name="phone" placeholder="Phone No" value={form.phone} onChange={handleChange} className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" />
               <input type="email" name="email" placeholder="Email Address" value={form.email} onChange={handleChange} className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" />
             </div>
           </div>

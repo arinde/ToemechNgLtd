@@ -6,8 +6,6 @@ import { useInView } from "react-intersection-observer";
 import {
   ShieldCheck,
   Cog,
-  Workflow,
-  Leaf,
   Star,
   Globe,
   HardHat,

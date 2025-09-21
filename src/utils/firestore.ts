@@ -36,6 +36,17 @@ export type ClientData = {
     address?: string;
 };
 
+type ProjectWithId = {
+  id: string;
+  title: string;
+  company: string;
+  description: string;
+  images: string[];
+  location: string;
+  client: string;
+  status: "ongoing" | "completed";
+};
+
 export async function addStaff(employees: EmployeesData) {
     const docRef = await addDoc(collection(db, "employees"), employees)
     return docRef.id
@@ -78,13 +89,16 @@ export async function addProject(project: ProjectData) {
 }
 
 // New function to fetch all projects
-export async function getAllProjects() {
+export async function getAllProjects(): Promise<ProjectWithId[]> {
   const projectsCollectionRef = collection(db, "projects");
   const projectsSnapshot = await getDocs(projectsCollectionRef);
-  const projectsList = projectsSnapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
+  const projectsList = projectsSnapshot.docs.map((doc) => {
+    const data = doc.data() as Omit<ProjectWithId, "id">;
+    return {
+      id: doc.id,
+      ...data,
+    };
+  });
   return projectsList;
 }
 
