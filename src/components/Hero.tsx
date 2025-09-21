@@ -72,8 +72,8 @@ const TomechHeroSection = () => {
         <div ref={heroRef} className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           
           {/* Main Heading */}
-          <div ref={headingRef} className="mb-6">
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
+          <div ref={headingRef} className="mb-4">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight -mt-10">
               <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent">
                 TOEMECH NIG LTD
               </span>
@@ -84,7 +84,7 @@ const TomechHeroSection = () => {
           {/* Subheading */}
           <div ref={subheadingRef} className="mb-10">
             <h2 className="text-xl md:text-2xl lg:text-3xl font-light text-white mb-4">
-              Electrical & Mechanical
+              Powering Progress &
               <span className="block font-semibold text-blue-300">Engineering Excellence</span>
             </h2>
             <p className="text-base md:text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">

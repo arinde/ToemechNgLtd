@@ -3,14 +3,11 @@ import ContactForm from '../components/ContactForm';
 import ContactInfo from '../components/ContactInfo';
 
 const backgroundImages: string[] = [
-  '/toemech1.jpeg',
-  '/Services.jpg',
-  '/toemech2.jpeg',
-  '/Services.jpg',
-  '/toemech3.jpeg',
-  '/Services.jpg',
-  '/toemech4/jpeg',
-  '/Services.jpg',
+  '/toemech7.jpeg',
+  '/toemech5.jpeg',
+  '/toemech6.jpeg',
+  '/toemech9/jpeg',
+  '/toemech10/jpeg',
 ];
 
 const ContactPage: React.FC = () => {
@@ -44,7 +41,7 @@ const ContactPage: React.FC = () => {
       </div>
 
       {/* Main Content Section */}
-      <div className="container mx-auto py-12 px-4">
+      <div className=" mx-auto py-12 px-0">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
           <ContactForm />
           <div className="md:mt-8 md:ml-12">

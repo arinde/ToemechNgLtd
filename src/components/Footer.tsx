@@ -9,12 +9,13 @@ const Footer = () => {
       {/* Top Border */}
       <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-blue-600 via-cyan-400 to-green-500" />
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
         {/* Brand */}
         <div>
-          <h2 className="text-2xl font-bold text-white tracking-wide mb-4">Toemech</h2>
+          <h2 className="text-2xl font-bold text-white tracking-wide">Toemech Nigeria Ltd</h2>
+          <h3 className="text-gray-100 text-sm font-serif font-bold leading-relaxed">RC: 480129</h3>
           <p className="text-gray-400 text-sm leading-relaxed mb-6">
-            Delivering cutting-edge **mechanical** and **electrical engineering** solutions
+            Delivering cutting-edge mechanical and electrical engineering solutions
             with precision, safety, and innovation.
           </p>
           <div className="flex gap-4">
@@ -75,18 +76,18 @@ const Footer = () => {
           <ul className="space-y-3 text-sm">
             <li className="flex items-start gap-3">
               <MapPin className="w-5 h-5 text-blue-400 mt-1" />
-              <span>Plot 12 Engineering Road, Ikeja Industrial Estate, Lagos, Nigeria</span>
+              <span>15, titus towoju street, apeka estate, ikorodu lagos state.</span>
             </li>
             <li className="flex items-center gap-3">
               <Phone className="w-5 h-5 text-blue-400" />
-              <a href="tel:+2348000000000" className="hover:text-blue-400 transition-colors">
-                +234 800 000 0000
+              <a href="tel:+2348023444635" className="hover:text-blue-400 transition-colors">
+                +2348023444635, +2349124046666
               </a>
             </li>
             <li className="flex items-center gap-3">
               <Mail className="w-5 h-5 text-blue-400" />
-              <a href="mailto:info@toemech.com" className="hover:text-blue-400 transition-colors">
-                info@toemech.com
+              <a href="mailto:tomech2013@gmail.com" className="hover:text-blue-400 transition-colors">
+                tomech2013@gmail.com
               </a>
             </li>
           </ul>

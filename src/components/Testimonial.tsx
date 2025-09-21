@@ -45,8 +45,6 @@ export default function Testimonial() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Entrance animation when section is in view
-      // Use fromTo() to ensure the elements animate from opacity: 0 to opacity: 1
       gsap.fromTo(
         ".testimonial-card",
         { opacity: 0, y: 40 },
@@ -89,7 +87,7 @@ export default function Testimonial() {
     >
       {/* Header */}
       <div className="max-w-7xl mx-auto px-6 mb-12 text-center">
-        <h2 className="text-4xl md:text-5xl font-bold text-blue-800">
+        <h2 className="text-4xl md:text-5xl font-bold font-serif text-blue-800">
           What Our Clients Say
         </h2>
         <p className="text-gray-600 mt-4 max-w-2xl mx-auto text-sm md:text-base">

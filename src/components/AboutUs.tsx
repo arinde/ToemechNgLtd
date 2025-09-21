@@ -4,15 +4,15 @@ import Image from "next/image";
 
 export default function AboutSection() {
   return (
-    <section className="bg-gray-100 py-20 px-6 md:px-12 lg:px-20">
+    <section className="bg-gray-100 py-12 px-6 md:px-12 lg:px-20">
       <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
         {/* Left Side - Text */}
         <div>
-          <h3 className="text-lg font-semibold text-gray-600 mb-2">Who we are</h3>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h3 className="text-lg font-semibold text-blue-600">Who we are</h3>
+          <h2 className="text-2xl md:text-5xl font-bold mb-2 mt-2">
             Our Company <span className="text-gray-700">Profile</span>
           </h2>
-          <p className="text-gray-700 leading-relaxed mb-6 text-lg">
+          <p className="text-gray-700 leading-relaxed mb-4 text-lg">
             <strong>Toemech NG Ltd</strong> is an indigenous{" "}
             <strong>mechanical and electrical engineering solutions company</strong>, 
             providing high-quality services for both{" "}
@@ -42,7 +42,7 @@ export default function AboutSection() {
         <div className="grid grid-cols-2 gap-4">
           <div className="relative w-full h-56 md:h-64 rounded-lg overflow-hidden shadow-md">
             <Image
-              src="/toemech1.jpeg"
+              src="/toemech7.jpeg"
               alt="Industrial Engineering"
               fill
               className="object-cover"
@@ -50,7 +50,7 @@ export default function AboutSection() {
           </div>
           <div className="relative w-full h-72 md:h-80 rounded-lg overflow-hidden shadow-md">
             <Image
-              src="/toemech2.jpeg"
+              src="/toemech9.jpeg"
               alt="Electrical Works"
               fill
               className="object-cover"
@@ -58,7 +58,7 @@ export default function AboutSection() {
           </div>
           <div className="relative w-full h-72 md:h-80 rounded-lg overflow-hidden shadow-md">
             <Image
-              src="/toemech3.jpeg"
+              src="/toemech6.jpeg"
               alt="Engineering Team"
               fill
               className="object-cover"

@@ -79,7 +79,7 @@ export default function ToemechWhyUs() {
     <section
       ref={rootRef}
       aria-labelledby="why-us-heading"
-      className="relative overflow-hidden py-16 px-6 bg-gradient-to-b from-white via-gray-50 to-white"
+      className="relative overflow-hidden py-12  px-6 bg-gradient-to-b from-white via-gray-50 to-white"
     >
       <div className="pointer-events-none absolute -left-24 -top-24 w-80 h-80 rounded-full bg-gradient-to-tr from-indigo-50 to-indigo-100 opacity-40 blur-3xl rotate-12" />
       <div className="pointer-events-none absolute -right-24 -bottom-24 w-80 h-80 rounded-full bg-gradient-to-br from-amber-50 to-amber-100 opacity-40 blur-3xl -rotate-6" />
@@ -91,7 +91,7 @@ export default function ToemechWhyUs() {
             id="why-us-heading"
             className="why-heading text-3xl sm:text-4xl font-extrabold leading-tight text-gray-900 opacity-100"
           >
-            Why partners choose <span className="text-amber-600">Toemech</span>
+            Why partners choose <span className="text-blue-600">Toemech</span>
           </h2>
           <p className="why-sub mt-4 text-gray-600 max-w-xl opacity-100">
             We fuse mechanical precision with electrical intelligence to deliver
@@ -137,7 +137,7 @@ export default function ToemechWhyUs() {
             >
               <div className="flex items-center justify-between">
                 <div className="inline-flex items-center justify-center w-11 h-11 rounded-lg bg-white shadow-sm">
-                  <c.Icon className="w-6 h-6 text-amber-600" />
+                  <c.Icon className="w-6 h-6 text-blue-600" />
                 </div>
                 <div className="text-xs font-semibold uppercase text-gray-400">
                   {c.id === "safety" ? "Trusted" : "Specialist"}
@@ -154,7 +154,7 @@ export default function ToemechWhyUs() {
                   {c.bullets.map((b, i) => (
                     <li key={i} className="flex items-start gap-2">
                       <svg
-                        className="w-4 h-4 mt-1 text-green-500 flex-shrink-0"
+                        className="w-4 h-4 mt-1 text-blue-500 flex-shrink-0"
                         viewBox="0 0 24 24"
                         fill="none"
                       >
@@ -175,7 +175,7 @@ export default function ToemechWhyUs() {
               <div className="mt-4">
                 <a
                   href="#contact"
-                  className="inline-flex items-center text-sm font-medium text-amber-600 hover:underline"
+                  className="inline-flex items-center text-sm font-medium text-blue-600 hover:underline"
                 >
                   Contact our team →
                 </a>

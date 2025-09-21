@@ -16,37 +16,37 @@ const services = [
     title: "Industrial Electrical Systems",
     description:
       "Design, installation, and maintenance of reliable electrical systems for factories, plants, and industries.",
-    icon: <Bolt className="w-10 h-10 text-red-600" />,
+    icon: <Bolt className="w-10 h-10 text-gray-400" />,
   },
   {
     title: "Mechanical Solutions",
     description:
       "HVAC, plumbing, piping, and structural fabrication services tailored to industrial and residential needs.",
-    icon: <Wrench className="w-10 h-10 text-red-600" />,
+    icon: <Wrench className="w-10 h-10 text-gray-400" />,
   },
   {
     title: "Residential Engineering",
     description:
       "Electrical and mechanical installations for homes and estates, ensuring safety and efficiency.",
-    icon: <Home className="w-10 h-10 text-red-600" />,
+    icon: <Home className="w-10 h-10 text-gray-200" />,
   },
   {
     title: "Material Supply",
     description:
       "Trusted sourcing and supply of top-quality electrical and mechanical materials at competitive rates.",
-    icon: <Package className="w-10 h-10 text-red-600" />,
+    icon: <Package className="w-10 h-10 text-gray-400" />,
   },
   {
     title: "Industrial Support Services",
     description:
       "Comprehensive engineering support including inspection, maintenance, and system upgrades.",
-    icon: <Factory className="w-10 h-10 text-red-600" />,
+    icon: <Factory className="w-10 h-10 text-gray-400" />,
   },
   {
     title: "Safety & Compliance",
     description:
       "Ensuring all projects meet strict safety standards and regulatory compliance for long-term reliability.",
-    icon: <ShieldCheck className="w-10 h-10 text-red-600" />,
+    icon: <ShieldCheck className="w-10 h-10 text-gray-400" />,
   },
 ];
 
@@ -61,7 +61,7 @@ const ServicesSection = () => {
 
   return (
     <section
-      className="relative py-20 bg-cover bg-center"
+      className="relative py-16 bg-cover bg-center"
       style={{ backgroundImage: "url('/Services.jpg')" }}
     >
       {/* Overlay for contrast */}

@@ -1,15 +1,15 @@
-import React from 'react';
+import * as React from 'react';
 
 const ContactInfo: React.FC = () => {
   return (
-    <div className="text-gray-700 space-y-6">
+    <div className="text-gray-700 space-y-6 flex flex-col justify-center items-start mx-4">
       <div className="flex items-center space-x-3">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
         </svg>
         <div>
           <h3 className="font-semibold">Email</h3>
-          <p className="text-sm">toematch@gmail.com</p>
+          <p className="text-sm">tomech2013@gmail.com</p>
         </div>
       </div>
       <div className="flex items-center space-x-3">
@@ -18,7 +18,7 @@ const ContactInfo: React.FC = () => {
         </svg>
         <div>
           <h3 className="font-semibold">Phone</h3>
-          <p className="text-sm">+2349065758745</p>
+          <p className="text-sm">+2348023444635, +2349124046666</p>
         </div>
       </div>
       <div className="flex items-center space-x-3">
@@ -28,7 +28,7 @@ const ContactInfo: React.FC = () => {
         </svg>
         <div>
           <h3 className="font-semibold">Office</h3>
-          <p className="text-sm">34, amuwo odofin, lagos state.</p>
+          <p className="text-sm">15, titus towoju street, apeka estate, ikorodu lagos state.</p>
         </div>
       </div>
     </div>

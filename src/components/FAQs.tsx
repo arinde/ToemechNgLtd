@@ -13,7 +13,7 @@ const faqs: FAQ[] = [
   {
     question: "What services does Toemach provide?",
     answer:
-      "Toemach offers end-to-end electrical and mechanical engineering solutions, including power system design, industrial automation, HVAC and ventilation, plumbing installations, and preventive maintenance.",
+      "Toemech offers end-to-end electrical and mechanical engineering solutions, including power system design, industrial automation, HVAC and ventilation, plumbing installations, and preventive maintenance.",
   },
   {
     question: "Do you handle custom electrical and mechanical projects?",
@@ -28,7 +28,7 @@ const faqs: FAQ[] = [
   {
     question: "Can you support renewable energy solutions and efficiency improvements?",
     answer:
-      "Definitely. Toemach implements solar PV systems, LED lighting retrofits, energy audits, and smart controls to reduce energy consumption and carbon footprint.",
+      "Definitely. Toemech implements solar PV systems, LED lighting retrofits, energy audits, and smart controls to reduce energy consumption and carbon footprint.",
   },
   {
     question: "How do I request a quote?",
@@ -77,7 +77,7 @@ export default function FaqSection() {
       className="w-full bg-gray-50 text-gray-800 py-16 px-4 md:px-8"
     >
       <div className="max-w-3xl mx-auto text-center mb-8">
-        <h2 className="text-3xl md:text-4xl font-bold">Frequently Asked Questions</h2>
+        <h2 className="text-3xl font-serif md:text-4xl font-bold">FAQs</h2>
         <p className="mt-2 text-gray-600">
           Answers to common questions about our services
         </p>
@@ -85,14 +85,14 @@ export default function FaqSection() {
 
       <div ref={containerRef} className="max-w-3xl mx-auto space-y-4">
         {faqs.map((faq, idx) => (
-          <div key={idx} className="border border-gray-300 rounded-lg overflow-hidden">
+          <div key={idx} className="border-0 border-gray-300 rounded-lg overflow-hidden">
             <button
-              className="w-full flex justify-between items-center px-6 py-4 bg-white hover:bg-gray-100 transition-colors"
+              className="w-full flex justify-between items-center px-4 py-4 bg-white hover:bg-gray-100 transition-colors"
               onClick={() =>
                 setActiveIndex((prev) => (prev === idx ? null : idx))
               }
             >
-              <span className="text-lg font-medium">{faq.question}</span>
+              <span className="md:text-lg text-md text-left font-medium">{faq.question}</span>
               <ChevronDown
                 className={`transform transition-transform duration-300 ${
                   activeIndex === idx ? "-rotate-180" : "rotate-0"
@@ -104,7 +104,7 @@ export default function FaqSection() {
               className="px-6 overflow-hidden"
               style={{ height: 0, paddingTop: 0, paddingBottom: 0 }}
             >
-              <p className="py-4 text-gray-700">{faq.answer}</p>
+              <p className="py-2 text-gray-700 text-sm">{faq.answer}</p>
             </div>
           </div>
         ))}
