@@ -9,7 +9,7 @@ import { onAuthStateChanged } from "firebase/auth";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<string | null>(null);
   const mobileMenuRef = useRef<HTMLDivElement | null>(null);
 
   const toggleClick = () => setIsOpen(!isOpen);
@@ -17,7 +17,7 @@ export default function Navbar() {
   // ✅ Listen for login/logout changes
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+      setUser(currentUser ? currentUser.uid : null);
     });
     return () => unsubscribe();
   }, []);

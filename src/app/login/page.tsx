@@ -35,6 +35,7 @@ export default function App() {
           ? err
           : "An unknown error occurred";
       toast.error("Kindly check your email or password");
+      console.error("Login error:", errorMessage);
     } finally {
       setIsLoggingIn(false);
     }
