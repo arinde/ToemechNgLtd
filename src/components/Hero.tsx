@@ -73,7 +73,7 @@ const TomechHeroSection = () => {
           
           {/* Main Heading */}
           <div ref={headingRef} className="mb-4">
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight -mt-10">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight -mt-10 md:mt-4">
               <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent">
                 TOEMECH NIG LTD
               </span>
