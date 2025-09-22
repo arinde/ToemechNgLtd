@@ -174,7 +174,7 @@ export default function ToemechWhyUs() {
 
               <div className="mt-4">
                 <a
-                  href="https://wa.me/23480234444635?text=Hello%20Toemech%2C%20I%27d%20like%20to%20get%20a%20quote."
+                  href="https://wa.me/2348023444635?text=Hello%20Toemech%2C%20I%27d%20like%20to%20get%20a%20quote."
                   target="_blank"
                   rel="noopener noreferrer"
                   
