@@ -102,9 +102,9 @@ export default function Navbar() {
             <li className="hover:text-blue-600 transition mobile-menu-item">Gallery</li>
             <li className="hover:text-blue-600 transition mobile-menu-item">Services</li>
             <li className="hover:text-blue-600 transition mobile-menu-item">Team</li>
-            <li className="hover:text-blue-600 transition mobile-menu-item">Blog</li>
-            <li className="hover:text-blue-600 transition mobile-menu-item">Contact</li>
-            <Link href="/login" className="mobile-menu-item">Login</Link>
+            <li onClick={toggleClick} className="hover:text-blue-600 transition mobile-menu-item">Blog</li>
+            <li onClick={toggleClick} className="hover:text-blue-600 transition mobile-menu-item">Contact</li>
+            <Link href="/login" onClick={toggleClick} className="mobile-menu-item">Login</Link>
           </ul>
         </div>
       )}
