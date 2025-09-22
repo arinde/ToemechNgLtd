@@ -63,6 +63,7 @@ const ServicesSection = () => {
     <section
       className="relative py-16 bg-cover bg-center"
       style={{ backgroundImage: "url('/Services.jpg')" }}
+      id="services"
     >
       {/* Overlay for contrast */}
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>

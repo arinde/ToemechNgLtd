@@ -174,7 +174,10 @@ export default function ToemechWhyUs() {
 
               <div className="mt-4">
                 <a
-                  href="#contact"
+                  href="https://wa.me/23480234444635?text=Hello%20Toemech%2C%20I%27d%20like%20to%20get%20a%20quote."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  
                   className="inline-flex items-center text-sm font-medium text-blue-600 hover:underline"
                 >
                   Contact our team →

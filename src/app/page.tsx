@@ -10,6 +10,7 @@ import ServicesSection from "@/components/Services"
 import TeamSection from "@/components/Team";
 import TestimonialSection from "@/components/Testimonial";
 import ToemechWhyUs from "@/components/WhyUs";
+import WhatsAppFAB from "@/components/WhatsappFAB";
 
 export default function Home() {
 
@@ -25,6 +26,7 @@ export default function Home() {
         <TeamSection />
         <ContactPage />
         <FaqSection />
+        <WhatsAppFAB />
       </>
       
   )

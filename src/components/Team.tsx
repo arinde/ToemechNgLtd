@@ -71,7 +71,8 @@ const TeamSection: React.FC = () => {
   const displayedEmployees = employees.slice(0, 4);
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <section id='team'>
+    <div className="container mx-auto px-4 py-12 ">
       <div className="text-center mb-12">
         <h2 className="text-3xl font-bold font-serif text-blue-600 mb-2">Meet The Team</h2>
         <p className="text-gray-600 max-w-2xl mx-auto">
@@ -95,6 +96,7 @@ const TeamSection: React.FC = () => {
         </div>
       )}
     </div>
+    </section>
   );
 };
 

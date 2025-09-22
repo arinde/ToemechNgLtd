@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function AboutSection() {
   return (
-    <section className="bg-gray-100 py-12 px-6 md:px-12 lg:px-20">
+    <section id="about" className="bg-gray-100 py-12 px-6 md:px-12 lg:px-20">
       <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
         {/* Left Side - Text */}
         <div>

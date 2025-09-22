@@ -95,13 +95,18 @@ const TomechHeroSection = () => {
 
           {/* Call to Action */}
           <div ref={ctaRef} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button className="group relative bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 py-4 rounded-full font-semibold text-base transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-blue-500/25 overflow-hidden">
+            <a
+              href="https://wa.me/23480234444635?text=Hello%20Toemech%2C%20I%27d%20like%20to%20get%20a%20quote."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 py-4 rounded-full font-semibold text-base transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-blue-500/25 overflow-hidden"
+            >
               <span className="relative z-10 flex items-center gap-3">
                 Get Quote Today
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </button>
+            </a>
             
             <button className="group relative border-2 border-white/80 text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-full font-semibold text-base transition-all duration-300 transform hover:scale-105 backdrop-blur-sm">
               <span className="flex items-center gap-3">

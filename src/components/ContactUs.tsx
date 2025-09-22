@@ -24,6 +24,7 @@ const ContactPage: React.FC = () => {
   }, []); 
 
   return (
+    <section id='contact'>
     <div className="bg-gray-100 min-h-screen">
       {/* Hero Section with Carousel Background */}
       <div
@@ -50,6 +51,7 @@ const ContactPage: React.FC = () => {
         </div>
       </div>
     </div>
+    </section>
   );
 };
 
