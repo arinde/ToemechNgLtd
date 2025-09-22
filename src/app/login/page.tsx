@@ -25,7 +25,7 @@ export default function App() {
     setIsLoggingIn(true);
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      toast.success("Login successful!");
+      //toast.success("Login successful!");
     } catch (err) {
       const errorMessage =
         err instanceof Error
@@ -33,7 +33,7 @@ export default function App() {
           : typeof err === "string"
           ? err
           : "An unknown error occurred";
-      toast.error(errorMessage);
+      toast.error("kindly check your email or password");
     } finally {
       setIsLoggingIn(false);
     }
@@ -53,8 +53,9 @@ export default function App() {
       <Toaster position="top-center" />
       <div className="w-full max-w-md p-8 m-4 space-y-6 backdrop-blur-xl bg-white/30 rounded-3xl shadow-lg border border-white/50">
         <h1 className="text-3xl font-bold text-center text-gray-800">
-          Toemech Nigeria Limited Login
+          Toemech Nigeria Limited
         </h1>
+        <p className="text-blue-600 text-center font-serif font font-medium">Kindly enter your Login details</p>
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
             <label
