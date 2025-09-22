@@ -237,14 +237,15 @@ export default function DashboardPage() {
 
   return (
     <div className="p-8 mt-16">
-      <h1 className="text-4xl font-bold mb-8">Admin Dashboard</h1>
+      <h1 className="text-4xl font-bold ">Admin Dashboard</h1>
+      <button className="border-0 shadow-2xl rounded-2xl bg-gray-300 p-2 mb-8" onClick={() => router.push("/")}> Home Page</button>
+      <button className="border-0 shadow-2xl rounded-2xl bg-gray-300 p-2 mb-8" onClick={handleLogout}> Logout</button>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Employees Card with Add Button */}
         <div className="bg-white p-6 rounded-lg shadow-md">
           <div className="flex justify-between items-center">
             <h2 className="text-2xl font-semibold text-gray-700">Employees</h2>
-            <button onClick={handleLogout}> Signout</button>
             <Link href="/staffReg">
               <button className="px-3 py-1 bg-blue-600 text-white rounded-md">
                 Add
