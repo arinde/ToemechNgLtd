@@ -3,7 +3,7 @@ import React from 'react';
 const ContactForm: React.FC = () => {
   return (
     // Removed max-w-lg and mx-auto. Added responsive padding for mobile.
-    <div className="bg-white p-8 rounded-lg shadow-md md:max-w-lg md:mx-auto md:px-0 mx-3">
+    <div className="bg-white p-8 rounded-lg shadow-md md:max-w-lg md:mx-auto md:px-0 mx-3 md:px-4 md:w-full">
       <form>
         <div className="mb-4">
           <label htmlFor="fullName" className="block text-gray-700 font-bold mb-2">
