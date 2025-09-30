@@ -1,9 +1,13 @@
 "use client";
-import Loading from "./loading";
-import { useAuth } from "@/providers/AuthContext";
-import Link from "next/link";
-import Image from "next/image";
+
 import { useState, useEffect } from "react";
+import Loading from "./loading";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
+import { signOut } from "firebase/auth";
+import { Trash, Edit, X } from "lucide-react";
+import { useAuth } from "@/providers/AuthContext";
 import {
   getCollectionCount,
   getAllStaff,
@@ -13,28 +17,22 @@ import {
   getAllClients,
   deleteClient,
 } from "@/utils/firestore";
-import { Trash, Edit } from "lucide-react";
-import { toast } from "react-hot-toast";
 import EditStaffForm from "@/components/EditStaffForm";
 import AddProjectForm from "@/components/AddProjectForm";
 import EditProjectForm from "@/components/EditProjectForm";
 import AddClientForm from "@/components/AddClientForm";
 import EditClientForm from "@/components/EditClientForm";
-import { useRouter } from "next/navigation";
-import { signOut } from "firebase/auth";
 import { auth } from "@/lib/firebase";
-import { X } from "lucide-react"
 
 export type EmployeeWithId = {
-    id: string;
-    name: string;
-    role: string;
-    imageUrl: string;
-    bio: string;
-    phone: string;
-    socials: { twitter?: string; linkedin?: string; email?: string };
-
-}
+  id: string;
+  name: string;
+  role: string;
+  imageUrl: string;
+  bio: string;
+  phone: string;
+  socials: { twitter?: string; linkedin?: string; email?: string };
+};
 
 type ClientWithId = {
   id: string;
@@ -67,31 +65,60 @@ export default function DashboardPage() {
   const [dataLoading, setDataLoading] = useState(true);
 
   const [employees, setEmployees] = useState<EmployeeWithId[]>([]);
-  const [selectedEmployee, setSelectedEmployee] = useState<EmployeeWithId | null>(null);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [projects, setProjects] = useState<ProjectWithId[]>([]);
+  const [clients, setClients] = useState<ClientWithId[]>([]);
+
+  // modal states
+  const [selectedEmployee, setSelectedEmployee] = useState<EmployeeWithId | null>(null);
+  const [selectedProject, setSelectedProject] = useState<ProjectWithId | null>(null);
+  const [selectedClient, setSelectedClient] = useState<ClientWithId | null>(null);
+
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isAddProjectModalOpen, setIsAddProjectModalOpen] = useState(false);
   const [isEditProjectModalOpen, setIsEditProjectModalOpen] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<ProjectWithId | null>(null);
   const [isAddClientModalOpen, setIsAddClientModalOpen] = useState(false);
-  const [clients, setClients] = useState<ClientWithId[]>([]);
   const [isEditClientModalOpen, setIsEditClientModalOpen] = useState(false);
-  const [selectedClient, setSelectedClient] = useState<ClientWithId | null>(null);
+
+  const [activeTab, setActiveTab] = useState<"employees" | "projects" | "clients">("employees");
+
+  // ✅ Greeting + Date/Time
+  const [dateTime, setDateTime] = useState(new Date());
+  useEffect(() => {
+    const timer = setInterval(() => setDateTime(new Date()), 60_000);
+    return () => clearInterval(timer);
+  }, []);
+  const hour = dateTime.getHours();
+  const greeting =
+    hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
+  const formattedDate = dateTime.toLocaleDateString(undefined, {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  const formattedTime = dateTime.toLocaleTimeString(undefined, {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 
   useEffect(() => {
     if (!authLoading) {
-      if (!user) {
-        router.push("/login");
-      } else {
-        refreshData();
-      }
+      if (!user) router.push("/login");
+      else refreshData();
     }
   }, [user, authLoading, router]);
 
   const refreshData = async () => {
     setDataLoading(true);
     try {
-      const [staffCount, projectCount, clientCount, staffList, projectsList, clientsList] = await Promise.all([
+      const [
+        staffCount,
+        projectCount,
+        clientCount,
+        staffList,
+        projectsList,
+        clientsList,
+      ] = await Promise.all([
         getCollectionCount("employees"),
         getCollectionCount("projects"),
         getCollectionCount("clients"),
@@ -99,132 +126,18 @@ export default function DashboardPage() {
         getAllProjects(),
         getAllClients(),
       ]);
-
       setEmployeesCount(staffCount);
       setProjectsCount(projectCount);
       setClientsCount(clientCount);
       setEmployees(staffList as EmployeeWithId[]);
       setProjects(projectsList as ProjectWithId[]);
       setClients(clientsList as ClientWithId[]);
-    } catch (error) {
-      console.error("Failed to fetch dashboard data:", error);
+    } catch (err) {
+      console.error(err);
       toast.error("Failed to load dashboard data.");
     } finally {
       setDataLoading(false);
     }
-  };
-
-  if (authLoading || dataLoading) {
-    return <Loading />;
-  }
-
-  const handleDeleteStaff = async (id: string, name: string) => {
-    if (window.confirm(`Are you sure you want to delete ${name}?`)) {
-      try {
-        await deleteStaff(id);
-        toast.success(`${name} deleted successfully!`);
-        refreshData();
-      } catch (error) {
-        console.error("Error deleting staff:", error);
-        toast.error("Failed to delete staff.");
-      }
-    }
-  };
-
-  const handleEditClick = (employee: EmployeeWithId) => {
-    setSelectedEmployee(employee);
-    setIsEditModalOpen(true);
-  };
-
-  const handleUpdateSuccess = () => {
-    refreshData();
-  };
-
-  const handleCloseModal = () => {
-    setIsEditModalOpen(false);
-    setSelectedEmployee(null);
-  };
-
-  const handleDeleteProject = async (id: string, title: string) => {
-    if (window.confirm(`Are you sure you want to delete the project: ${title}?`)) {
-      try {
-        await deleteProject(id);
-        toast.success("Project deleted successfully!");
-        refreshData();
-      } catch (error) {
-        console.error("Error deleting project:", error);
-        toast.error("Failed to delete project.");
-      }
-    }
-  };
-
-  const handleEditProjectClick = (project: ProjectWithId) => {
-    setSelectedProject(project);
-    setIsEditProjectModalOpen(true);
-  };
-
-  const handleUpdateProjectSuccess = () => {
-    refreshData();
-    handleCloseEditProjectModal();
-  };
-
-  const handleCloseEditProjectModal = () => {
-    setIsEditProjectModalOpen(false);
-    setSelectedProject(null);
-  };
-
-  const handleAddClientClick = () => {
-    setIsAddClientModalOpen(true);
-  };
-
-  const handleCloseAddClientModal = () => {
-    setIsAddClientModalOpen(false);
-  };
-  
-  const handleAddClientSuccess = () => {
-    refreshData();
-    handleCloseAddClientModal();
-  };
-
-  const handleEditClientClick = (client: ClientWithId) => {
-    setSelectedClient(client);
-    setIsEditClientModalOpen(true);
-  };
-
-  const handleUpdateClientSuccess = () => {
-    refreshData();
-    handleCloseEditClientModal();
-  };
-
-  const handleCloseEditClientModal = () => {
-    setIsEditClientModalOpen(false);
-    setSelectedClient(null);
-  };
-
-  const handleDeleteClient = async (id: string, name: string) => {
-    if (window.confirm(`Are you sure you want to delete the client: ${name}?`)) {
-      try {
-        await deleteClient(id);
-        toast.success("Client deleted successfully!");
-        refreshData();
-      } catch (error) {
-        console.error("Error deleting client:", error);
-        toast.error("Failed to delete client.");
-      }
-    }
-  };
-
-  const handleAddProjectClick = () => {
-    setIsAddProjectModalOpen(true);
-  };
-
-  const handleCloseAddProjectModal = () => {
-    setIsAddProjectModalOpen(false);
-  };
-  
-  const handleAddProjectSuccess = () => {
-    refreshData();
-    handleCloseAddProjectModal();
   };
 
   const handleLogout = async () => {
@@ -235,229 +148,383 @@ export default function DashboardPage() {
     }
   };
 
+  const handleDeleteStaff = async (id: string, name: string) => {
+    if (window.confirm(`Delete ${name}?`)) {
+      await deleteStaff(id);
+      toast.success(`${name} deleted`);
+      refreshData();
+    }
+  };
+  const handleEditClick = (e: EmployeeWithId) => {
+    setSelectedEmployee(e);
+    setIsEditModalOpen(true);
+  };
+  const handleDeleteProject = async (id: string, title: string) => {
+    if (window.confirm(`Delete project: ${title}?`)) {
+      await deleteProject(id);
+      toast.success("Project deleted");
+      refreshData();
+    }
+  };
+  const handleEditProjectClick = (p: ProjectWithId) => {
+    setSelectedProject(p);
+    setIsEditProjectModalOpen(true);
+  };
+  const handleDeleteClient = async (id: string, name: string) => {
+    if (window.confirm(`Delete client: ${name}?`)) {
+      await deleteClient(id);
+      toast.success("Client deleted");
+      refreshData();
+    }
+  };
+  const handleEditClientClick = (c: ClientWithId) => {
+    setSelectedClient(c);
+    setIsEditClientModalOpen(true);
+  };
+
+  if (authLoading || dataLoading) return <Loading />;
+
   return (
-    <div className="p-8 mt-16">
-      <h1 className="text-4xl font-bold ">Admin Dashboard</h1>
-      <button className="border-0 shadow-2xl rounded-2xl bg-gray-300 p-2 mb-8" onClick={() => router.push("/")}> Home Page</button>
-      <button className="border-0 shadow-2xl rounded-2xl bg-gray-300 p-2 mb-8" onClick={handleLogout}> Logout</button>
+    <div className="p-8 mt-0">
+      {/* ✅ Dynamic Greeting + Date/Time */}
+      <h2 className="text-2xl font-semibold">{greeting}, Mr Gabriel</h2>
+      <p className="text-gray-600 mt-1">
+        {formattedDate} • {formattedTime}
+      </p>
+      <h1 className="md:text-4xl text-2xl font-bold mt-4">Admin Dashboard</h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Employees Card with Add Button */}
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-semibold text-gray-700">Employees</h2>
-            <Link href="/staffReg">
-              <button className="px-3 py-1 bg-blue-600 text-white rounded-md">
-                Add
-              </button>
-            </Link>
-          </div>
-          <p className="text-5xl font-extrabold text-blue-600 mt-4">
-            {employeesCount}
-          </p>
-        </div>
-
-        {/* Projects Card with Add Button */}
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-semibold text-gray-700">Projects</h2>
-            <button 
-                onClick={handleAddProjectClick} 
-                className="px-3 py-1 bg-blue-600 text-white rounded-md">
-              Add
-            </button>
-          </div>
-          <p className="text-5xl font-extrabold text-blue-600 mt-4">
-            {projectsCount}
-          </p>
-        </div>
-
-        {/* Clients Card with Add Button */}
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-semibold text-gray-700">Clients</h2>
-            <button onClick={handleAddClientClick} className="px-3 py-1 bg-blue-600 text-white rounded-md">
-              Add
-            </button>
-          </div>
-          <p className="text-5xl font-extrabold text-blue-600 mt-4">
-            {clientsCount}
-          </p>
-        </div>
+      {/* summary cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+        <SummaryCard
+          title="Employees"
+          count={employeesCount}
+          onAdd={() => router.push("/staffReg")}
+        />
+        <SummaryCard
+          title="Projects"
+          count={projectsCount}
+          onAdd={() => setIsAddProjectModalOpen(true)}
+        />
+        <SummaryCard
+          title="Clients"
+          count={clientsCount}
+          onAdd={() => setIsAddClientModalOpen(true)}
+        />
       </div>
 
-        <div className="mt-12">
-            <h2 className="text-3xl font-bold mb-6 text-gray-800">Staff List</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {employees.map((employee) => (
-                <div
-                key={employee.id}
-                className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center"
-                >
-                <Image
-                    src={employee.imageUrl || "/path/to/placeholder-image.jpg"}
-                    alt={employee.name}
-                    className=" h-24 rounded-full object-cover mb-4"
-                    width={104}
-                    quality={100}
-                    height={100}
-                />
-                <h3 className="text-xl font-bold">{employee.name}</h3>
-                <p className="text-blue-600">{employee.role}</p>
-                <p className="text-sm text-gray-500 mt-2">{employee.bio}</p>
-                <div className="mt-4 flex space-x-4">
-                    <button
-                    onClick={() => handleEditClick(employee)}
-                    className="p-2 rounded-full bg-yellow-500 text-white hover:bg-yellow-600 transition-colors"
-                    >
-                    <Edit size={16} />
-                    </button>
-                    <button
-                    onClick={() => handleDeleteStaff(employee.id, employee.name)}
-                    className="p-2 rounded-full bg-red-500 text-white hover:bg-red-600 transition-colors"
-                    >
-                    <Trash size={16} />
-                    </button>
-                </div>
-                </div>
-            ))}
-            </div>
-        </div>
-
-        <div className="mt-12">
-            <h2 className="text-3xl font-bold mb-6 text-gray-800">Projects List</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project) => (
-                <div key={project.id} className="bg-white p-6 rounded-lg shadow-md">
-                    {project.images && project.images.length > 0 && (
-                        <div className="relative w-full h-48">
-                        <Image
-                            src={project.images[0]}
-                            alt={project.title}
-                            fill
-                            quality={100}
-                            className="object-cover rounded-md"
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
-                        />
-                        </div>
-                    )}
-                <h3 className="text-xl font-bold">Title: {project.title}</h3>
-                <p className="text-sm text-gray-500 mt-2 line-clamp-3">Location: {project.location}</p>
-                <p className="text-sm text-gray-500 mt-2 line-clamp-3">Company: {project.company}</p>
-                <p className="text-sm text-gray-500 mt-2 line-clamp-3">
-                    Project Description: {project.description}
-                </p>
-                <div className="mt-4">
-                    <span
-                    className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                        project.status === "ongoing"
-                        ? "bg-yellow-100 text-yellow-800"
-                        : "bg-green-100 text-green-800"
-                    }`}
-                    >
-                    {project.status}
-                    </span>
-                </div>
-                <div className="mt-4 flex space-x-4">
-                    <button
-                    onClick={() => handleEditProjectClick(project)}
-                    className="p-2 rounded-full bg-yellow-500 text-white hover:bg-yellow-600 transition-colors"
-                    >
-                    <Edit size={16} />
-                    </button>
-                    <button
-                    onClick={() => handleDeleteProject(project.id, project.title)}
-                    className="p-2 rounded-full bg-red-500 text-white hover:bg-red-600 transition-colors"
-                    >
-                    <Trash size={16} />
-                    </button>
-                </div>
-                </div>
-            ))}
-            </div>
-        </div>
-
-        <div className="mt-12">
-        <h2 className="text-3xl font-bold mb-6 text-gray-800">Clients List</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {clients.map((client) => (
-            <div key={client.id} className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-bold">{client.companyName}</h3>
-              <p className="text-gray-600">Name: {client.name}</p>
-              <p className="text-gray-600">Contact: {client.contactPerson}</p>
-              <p className="text-gray-600">Phone: {client.phone}</p>
-              <p className="text-gray-600">Address: {client.address}</p>
-              <p className="text-sm text-gray-500 mt-2">{client.email}</p>
-              <div className="mt-4 flex space-x-4">
-                <button
-                  onClick={() => handleEditClientClick(client)}
-                  className="p-2 rounded-full bg-yellow-500 text-white hover:bg-yellow-600 transition-colors"
-                >
-                  <Edit size={16} />
-                </button>
-                <button
-                  onClick={() => handleDeleteClient(client.id, client.name)}
-                  className="p-2 rounded-full bg-red-500 text-white hover:bg-red-600 transition-colors"
-                >
-                  <Trash size={16} />
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+      {/* tab selector */}
+      <div className="flex justify-center gap-8 mt-12 border-b border-gray-200">
+        {(["employees", "projects", "clients"] as const).map((tab) => (
+          <button
+            key={tab}
+            onClick={() => setActiveTab(tab)}
+            className={`relative pb-2 text-lg font-semibold transition-colors duration-300
+              ${
+                activeTab === tab
+                  ? "text-blue-600"
+                  : "text-gray-500 hover:text-gray-700"
+              }`}
+          >
+            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+            {activeTab === tab && (
+              <span className="absolute left-0 -bottom-[1px] w-full h-[2px] bg-blue-600"></span>
+            )}
+          </button>
+        ))}
       </div>
 
+      {/* tab content */}
+      {activeTab === "employees" && (
+        <EmployeeList
+          employees={employees}
+          onEdit={handleEditClick}
+          onDelete={handleDeleteStaff}
+        />
+      )}
+      {activeTab === "projects" && (
+        <ProjectList
+          projects={projects}
+          onEdit={handleEditProjectClick}
+          onDelete={handleDeleteProject}
+        />
+      )}
+      {activeTab === "clients" && (
+        <ClientList
+          clients={clients}
+          onEdit={handleEditClientClick}
+          onDelete={handleDeleteClient}
+        />
+      )}
+
+      {/* modals */}
       {isEditModalOpen && selectedEmployee && (
         <EditStaffForm
           employee={selectedEmployee}
-          onClose={handleCloseModal}
-          onUpdateSuccess={handleUpdateSuccess}
+          onClose={() => setIsEditModalOpen(false)}
+          onUpdateSuccess={refreshData}
         />
       )}
-
       {isEditProjectModalOpen && selectedProject && (
         <EditProjectForm
           project={selectedProject}
-          onClose={handleCloseEditProjectModal}
-          onUpdateSuccess={handleUpdateProjectSuccess}
+          onClose={() => setIsEditProjectModalOpen(false)}
+          onUpdateSuccess={refreshData}
         />
       )}
-
       {isAddProjectModalOpen && (
-        <div className="fixed inset-0 bg-gray-400 z-50 bg-opacity-50 overflow-y-auto w-full flex items-center justify-center p-4">
-          <div className="relative bg-white p-8  mt-24 rounded-lg shadow-xl w-full max-w-lg">
-            <button
-                className="absolute top-3 right-3 text-red-700 hover:text-gray-800 cursor-pointer"
-                onClick={handleCloseAddProjectModal}
-            >
-                <X />
-            </button>
-            <AddProjectForm onAddSuccess={handleAddProjectSuccess} onClose={handleCloseAddProjectModal} />
-          </div>
-        </div>
+        <Modal onClose={() => setIsAddProjectModalOpen(false)}>
+          <AddProjectForm
+            onAddSuccess={refreshData}
+            onClose={() => setIsAddProjectModalOpen(false)}
+          />
+        </Modal>
       )}
-
       {isAddClientModalOpen && (
-        <div className=" fixed inset-0 bg-gray-400 bg-opacity-50 overflow-y-auto z-50  w-full flex items-center justify-center p-4">
-          <div className="relative bg-white mt-24  p-8 rounded-lg shadow-xl w-full max-w-lg">
-            <button
-                className="absolute top-3 right-3 text-red-700 hover:text-gray-800 cursor-pointer"
-                onClick={handleCloseAddClientModal}
-            >
-                <X />
-            </button>
-            <AddClientForm onAddSuccess={handleAddClientSuccess} />
-          </div>
-        </div>
+        <Modal onClose={() => setIsAddClientModalOpen(false)}>
+          <AddClientForm onAddSuccess={refreshData} />
+        </Modal>
       )}
-
       {isEditClientModalOpen && selectedClient && (
         <EditClientForm
           client={selectedClient}
-          onClose={handleCloseEditClientModal}
-          onUpdateSuccess={handleUpdateClientSuccess}
+          onClose={() => setIsEditClientModalOpen(false)}
+          onUpdateSuccess={refreshData}
         />
       )}
     </div>
+  );
+}
+
+/* ----------------- small reusable pieces ----------------- */
+function SummaryCard({
+  title,
+  count,
+  onAdd,
+}: {
+  title: string;
+  count: number | null;
+  onAdd: () => void;
+}) {
+  return (
+    <div className="bg-white p-6 rounded-lg shadow-md">
+      <div className="flex justify-between items-center">
+        <h2 className="text-2xl font-semibold text-gray-700">{title}</h2>
+        <button
+          onClick={onAdd}
+          className="px-3 py-1 bg-blue-600 text-white rounded-md"
+        >
+          Add
+        </button>
+      </div>
+      <p className="text-5xl font-extrabold text-blue-600 mt-4">
+        {count ?? 0}
+      </p>
+    </div>
+  );
+}
+
+/* ✅ Modal with RED close button */
+function Modal({
+  children,
+  onClose,
+}: {
+  children: React.ReactNode;
+  onClose: () => void;
+}) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4 py-8">
+      <div className="relative w-full max-w-lg rounded-xl bg-white shadow-2xl p-6 flex flex-col">
+        <div className="absolute top-4 right-4 z-50">
+          <button
+            onClick={onClose}
+            aria-label="Close"
+            className="flex items-center justify-center rounded-full bg-red-100 p-2 text-red-600 hover:bg-red-200 hover:text-red-700 transition"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+        <div className="overflow-y-auto max-h-[80vh] pr-1">{children}</div>
+      </div>
+    </div>
+  );
+}
+
+/* Lists */
+function EmployeeList({
+  employees,
+  onEdit,
+  onDelete,
+}: {
+  employees: EmployeeWithId[];
+  onEdit: (e: EmployeeWithId) => void;
+  onDelete: (id: string, name: string) => void;
+}) {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+      {employees.map((e) => (
+        <div key={e.id} className="bg-white p-6 rounded-lg shadow-md text-center">
+          <div className="relative w-24 h-24 mx-auto rounded-full overflow-hidden mb-4">
+            <Image
+              src={e.imageUrl || "/placeholder.jpg"}
+              alt={e.name}
+              fill
+              sizes="96px"
+              className="object-cover object-top"
+            />
+          </div>
+          <h3 className="text-xl font-bold">{e.name}</h3>
+          <p className="text-blue-600">{e.role}</p>
+          <p className="text-sm text-gray-500 mt-2">{e.bio}</p>
+
+          <div className="mt-4 space-y-1 text-sm text-gray-700">
+            {e.phone && (
+              <p>
+                📞{" "}
+                <a href={`tel:${e.phone}`} className="hover:underline text-blue-600">
+                  {e.phone}
+                </a>
+              </p>
+            )}
+            {e.socials.email && (
+              <p>
+                ✉️{" "}
+                <a href={`mailto:${e.socials.email}`} className="hover:underline text-blue-600">
+                  {e.socials.email}
+                </a>
+              </p>
+            )}
+            {e.socials.linkedin && (
+              <p>
+                LinkedIn:{" "}
+                <a
+                  href={e.socials.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline text-blue-600"
+                >
+                  {e.socials.linkedin}
+                </a>
+              </p>
+            )}
+            {e.socials.twitter && (
+              <p>
+                Twitter:{" "}
+                <a
+                  href={e.socials.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline text-blue-600"
+                >
+                  {e.socials.twitter}
+                </a>
+              </p>
+            )}
+          </div>
+
+          <div className="mt-4 flex justify-center space-x-4">
+            <IconBtn onClick={() => onEdit(e)} color="yellow" icon={<Edit size={16} />} />
+            <IconBtn onClick={() => onDelete(e.id, e.name)} color="red" icon={<Trash size={16} />} />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ProjectList({
+  projects,
+  onEdit,
+  onDelete,
+}: {
+  projects: ProjectWithId[];
+  onEdit: (p: ProjectWithId) => void;
+  onDelete: (id: string, title: string) => void;
+}) {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+      {projects.map((p) => (
+        <div key={p.id} className="bg-white p-6 rounded-lg shadow-md">
+          {p.images?.[0] && (
+            <div className="relative w-full h-48 mb-4">
+              <Image
+                src={p.images[0]}
+                alt={p.title}
+                fill
+                className="object-cover rounded-md"
+              />
+            </div>
+          )}
+          <h3 className="text-xl font-bold">{p.title}</h3>
+          <p className="text-gray-500 text-sm">Location: {p.location}</p>
+          <p className="text-gray-500 text-sm">Company: {p.company}</p>
+          <p className="text-gray-500 text-sm line-clamp-3">{p.description}</p>
+          <span
+            className={`inline-block mt-2 px-3 py-1 rounded-full text-xs font-semibold ${
+              p.status === "ongoing"
+                ? "bg-yellow-100 text-yellow-800"
+                : "bg-green-100 text-green-800"
+            }`}
+          >
+            {p.status}
+          </span>
+          <div className="mt-4 flex space-x-4">
+            <IconBtn onClick={() => onEdit(p)} color="yellow" icon={<Edit size={16} />} />
+            <IconBtn onClick={() => onDelete(p.id, p.title)} color="red" icon={<Trash size={16} />} />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ClientList({
+  clients,
+  onEdit,
+  onDelete,
+}: {
+  clients: ClientWithId[];
+  onEdit: (c: ClientWithId) => void;
+  onDelete: (id: string, name: string) => void;
+}) {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+      {clients.map((c) => (
+        <div key={c.id} className="bg-white p-6 rounded-lg shadow-md">
+          <h3 className="text-xl font-bold">{c.companyName}</h3>
+          <p className="text-gray-600">Name: {c.name}</p>
+          <p className="text-gray-600">Contact: {c.contactPerson}</p>
+          <p className="text-gray-600">Phone: {c.phone}</p>
+          <p className="text-gray-600">Address: {c.address}</p>
+          <p className="text-sm text-gray-500 mt-2">{c.email}</p>
+          <div className="mt-4 flex space-x-4">
+            <IconBtn onClick={() => onEdit(c)} color="yellow" icon={<Edit size={16} />} />
+            <IconBtn onClick={() => onDelete(c.id, c.name)} color="red" icon={<Trash size={16} />} />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function IconBtn({
+  onClick,
+  color,
+  icon,
+}: {
+  onClick: () => void;
+  color: string;
+  icon: React.ReactNode;
+}) {
+  const colorClass =
+    color === "yellow"
+      ? "bg-yellow-500 hover:bg-yellow-600"
+      : "bg-red-500 hover:bg-red-600";
+  return (
+    <button
+      onClick={onClick}
+      className={`p-2 rounded-full text-white transition-colors ${colorClass}`}
+    >
+      {icon}
+    </button>
   );
 }

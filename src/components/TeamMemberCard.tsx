@@ -31,6 +31,8 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ employee }) => {
           fill
           sizes="(max-width:768px) 100vw, 33vw"
           className="object-cover object-center"
+          //object-contain object-top bg-gray-100
+          //object-cover object-top rounded-t-lg
           priority={false}
         />
       </div>
