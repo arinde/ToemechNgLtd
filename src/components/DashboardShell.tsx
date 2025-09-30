@@ -7,9 +7,11 @@ import { signOut } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
 
+// ✅ Use the same TabType as Sidebar
+type TabType = "dashboard" | "register" | "homepage";
+
 export default function DashboardShell({ children }: { children: React.ReactNode }) {
-  // client-side state lives here
-  const [activeTab, setActiveTab] = useState<"employees" | "projects" | "clients">("employees");
+  const [activeTab, setActiveTab] = useState<TabType>("dashboard");
   const router = useRouter();
 
   const handleLogout = async () => {
@@ -18,17 +20,20 @@ export default function DashboardShell({ children }: { children: React.ReactNode
       router.push("/login");
     } catch (err) {
       console.error("Logout failed:", err);
-      // optionally show a toast here (you already have react-hot-toast)
+      // You can add a toast.error here if desired
     }
   };
 
   return (
     <div className="flex min-h-screen bg-gray-50">
-      {/* Sidebar expects activeTab, setActiveTab, onLogout */}
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} onLogout={handleLogout} />
+      {/* Sidebar now matches the new TabType */}
+      <Sidebar
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+      />
 
-      {/* Main content area (offset for sidebar) */}
-      <main className="flex-1 p-6 lg:ml-64">{children}</main>
+      {/* Main content */}
+      <main className="flex-1 p-6 lg:ml-60">{children}</main>
     </div>
   );
 }
