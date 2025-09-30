@@ -1,54 +1,77 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react';
-import { Mail, Phone } from 'lucide-react'; // Added Phone icon
+"use client";
 
-// Declare the type directly in this file
+import Image from "next/image";
+import Link from "next/link";
+import React, { useState } from "react";
+import { Mail, Phone } from "lucide-react";
+
 export type EmployeesData = {
   name: string;
   role: string;
   imageUrl: string;
   phone: string;
   bio: string;
-  socials: { twitter?: string; linkedin?: string; email?: string;};
-}
+  socials: { twitter?: string; linkedin?: string; email?: string };
+};
 
 interface TeamMemberCardProps {
   employee: EmployeesData & { id: string };
 }
 
 const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ employee }) => {
+  const [expanded, setExpanded] = useState(false);
+
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col items-center text-center">
-      {/* Employee Image - Now rectangular and covers width */}
-      <div className="relative w-full h-48 mb-4"> {/* Adjusted for rectangular image */}
-        <Image 
+    <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col text-center">
+      {/* ✅ Image container with fixed ratio */}
+      <div className="relative w-full aspect-[4/3]"> 
+        <Image
           src={employee.imageUrl}
           alt={employee.name}
-          layout="fill" // Makes the image fill its parent container
-          objectFit="cover" // Ensures the image covers the area without distortion
-          className="rounded-t-lg" // Rounds only the top corners if desired, or remove for sharp corners
+          fill
+          sizes="(max-width:768px) 100vw, 33vw"
+          className="object-cover object-center"
+          priority={false}
         />
       </div>
-      
-      {/* Employee Details */}
-      <div className="p-6 pt-0"> {/* Adjusted padding if image takes top space */}
+
+      {/* ✅ Details */}
+      <div className="p-6 flex-1 flex flex-col items-center">
         <h3 className="text-lg font-bold text-gray-800">{employee.name}</h3>
         <p className="text-sm text-blue-600 font-semibold">{employee.role}</p>
 
-        {/* Social Icons */}
-        <div className="flex mt-3 space-x-4 items-center justify-center">
+        {/* Bio with view more/less */}
+        <div className="mt-3 text-gray-600 text-sm w-full">
+          <p
+            className={`transition-all duration-300 ${
+              expanded ? "line-clamp-none" : "line-clamp-3"
+            }`}
+          >
+            {employee.bio}
+          </p>
+          {employee.bio.length > 80 && (
+            <button
+              onClick={() => setExpanded((p) => !p)}
+              className="mt-1 text-blue-600 hover:underline text-sm font-medium"
+            >
+              {expanded ? "View less" : "Continue reading"}
+            </button>
+          )}
+        </div>
+
+        {/* Social / Contact */}
+        <div className="flex mt-4 space-x-4">
           {employee.phone && (
             <Link href={`tel:${employee.phone}`} passHref>
-              <span className="text-gray-600 hover:text-blue-500 transition-colors duration-200 cursor-pointer">
-                <Phone className="h-6 w-6" /> {/* Lucide Phone icon */}
+              <span className="cursor-pointer text-gray-600 hover:text-blue-500 transition-colors">
+                <Phone className="h-6 w-6" />
               </span>
             </Link>
           )}
           {employee.socials?.email && (
             <Link href={`mailto:${employee.socials.email}`} passHref>
-              <span className="text-gray-600 hover:text-blue-500 transition-colors duration-200 cursor-pointer">
-                <Mail className="h-6 w-6" /> {/* Lucide Mail icon */}
+              <span className="cursor-pointer text-gray-600 hover:text-blue-500 transition-colors">
+                <Mail className="h-6 w-6" />
               </span>
             </Link>
           )}
