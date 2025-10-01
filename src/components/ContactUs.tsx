@@ -4,7 +4,7 @@ import ContactInfo from '../components/ContactInfo';
 
 const backgroundImages: string[] = [
   '/toemech7.jpeg',
-  '/toemech5.jpeg',
+  '/toemech5.jpg',
   '/toemech6.jpeg',
   '/toemech9/jpeg',
   '/toemech10/jpeg',
