@@ -96,7 +96,7 @@ const TomechHeroSection = () => {
           {/* Call to Action */}
           <div ref={ctaRef} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a
-              href="https://wa.me/23480234444635?text=Hello%20Toemech%2C%20I%27d%20like%20to%20get%20a%20quote."
+              href="https://wa.me/2348023444635?text=Hello%20Toemech%2C%20I%27d%20like%20to%20get%20a%20quote."
               target="_blank"
               rel="noopener noreferrer"
               className="group relative bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 py-4 rounded-full font-semibold text-base transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-blue-500/25 overflow-hidden"

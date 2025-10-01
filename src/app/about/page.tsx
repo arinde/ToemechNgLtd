@@ -6,7 +6,7 @@ import { CheckCircle, Factory, Wrench, Zap, ShoppingCart } from "lucide-react";
 
 export default function AboutPage() {
   return (
-    <div className="bg-white text-gray-800 ">
+    <div className="bg-white text-gray-800">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-gray-900 to-gray-800 text-white py-28 px-6 text-center">
         <motion.div
@@ -39,8 +39,11 @@ export default function AboutPage() {
             career as a technician in 1992. With years of practical experience
             across different companies, he pursued higher education and became a{" "}
             <strong>COREN certified Engineer</strong> and a{" "}
-            <strong>Fellow of the Nigerian Association of Technologists in
-            Engineering (FNATE)</strong>.
+            <strong>
+              Fellow of the Nigerian Association of Technologists in Engineering
+              (FNATE)
+            </strong>
+            .
           </p>
           <p className="leading-relaxed text-gray-700">
             From humble beginnings, Toemech has grown into a leading force in{" "}
@@ -57,13 +60,14 @@ export default function AboutPage() {
           transition={{ duration: 0.8 }}
           className="flex flex-col items-center"
         >
-          <Image
-            src="/ceo.jpeg"
-            alt="Engr. Titus Towoju"
-            width={300}
-            height={80}
-            className="rounded-md shadow-xl object-cover"
-          />
+          <div className="w-[280px] h-[360px] relative">
+            <Image
+              src="/ceo.jpeg"
+              alt="Engr. Titus Towoju"
+              fill
+              className="rounded-xl shadow-xl object-cover"
+            />
+          </div>
           <h3 className="mt-4 text-xl font-semibold">Engr. Titus Towoju</h3>
           <p className="text-sm opacity-80">
             Founder & CEO, COREN Certified, FNATE
@@ -76,34 +80,53 @@ export default function AboutPage() {
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold mb-12 text-center">What We Do</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-            <motion.div whileHover={{ y: -5 }} className="bg-white shadow-md rounded-xl p-6">
+            <motion.div
+              whileHover={{ y: -5 }}
+              className="bg-white shadow-md rounded-xl p-6"
+            >
               <Factory className="w-10 h-10 text-blue-600 mb-4" />
-              <h3 className="text-lg font-semibold mb-2">Industrial Engineering</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                Industrial Engineering
+              </h3>
               <p className="text-sm leading-relaxed">
                 Design, installation, and maintenance of heavy-duty machines,
-                production lines, and power systems for industries across Nigeria.
+                production lines, and power systems for industries across
+                Nigeria.
               </p>
             </motion.div>
 
-            <motion.div whileHover={{ y: -5 }} className="bg-white shadow-md rounded-xl p-6">
+            <motion.div
+              whileHover={{ y: -5 }}
+              className="bg-white shadow-md rounded-xl p-6"
+            >
               <Zap className="w-10 h-10 text-yellow-600 mb-4" />
-              <h3 className="text-lg font-semibold mb-2">Electrical Solutions</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                Electrical Solutions
+              </h3>
               <p className="text-sm leading-relaxed">
-                Power distribution, control panels, automation, and safety systems
-                for both industries and homes.
+                Power distribution, control panels, automation, and safety
+                systems for both industries and homes.
               </p>
             </motion.div>
 
-            <motion.div whileHover={{ y: -5 }} className="bg-white shadow-md rounded-xl p-6">
+            <motion.div
+              whileHover={{ y: -5 }}
+              className="bg-white shadow-md rounded-xl p-6"
+            >
               <Wrench className="w-10 h-10 text-green-600 mb-4" />
-              <h3 className="text-lg font-semibold mb-2">Mechanical Services</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                Mechanical Services
+              </h3>
               <p className="text-sm leading-relaxed">
                 HVAC, plumbing, fabrication, industrial piping, repairs, and
                 optimization of machinery.
               </p>
             </motion.div>
 
-            <motion.div whileHover={{ y: -5 }} className="bg-white shadow-md rounded-xl p-6">
+            <motion.div
+              whileHover={{ y: -5 }}
+              className="bg-white shadow-md rounded-xl p-6"
+            >
               <ShoppingCart className="w-10 h-10 text-purple-600 mb-4" />
               <h3 className="text-lg font-semibold mb-2">Sales of Materials</h3>
               <p className="text-sm leading-relaxed">
@@ -117,7 +140,9 @@ export default function AboutPage() {
 
       {/* Project Approach */}
       <section className="max-w-6xl mx-auto py-20 px-6">
-        <h2 className="text-3xl font-bold mb-8 text-center">Our Project Approach</h2>
+        <h2 className="text-3xl font-bold mb-8 text-center">
+          Our Project Approach
+        </h2>
         <div className="space-y-6 max-w-3xl mx-auto">
           {[
             "Understanding client needs through consultation and site survey.",
@@ -172,7 +197,8 @@ export default function AboutPage() {
           src="/toemech10.jpeg"
           alt="Engineering Background"
           fill
-          className="absolute inset-0 object-cover z-0"
+          priority
+          className="absolute inset-0 object-cover object-center z-0"
         />
         <div className="absolute inset-0 bg-black/60 z-0"></div>
         <motion.div
@@ -188,7 +214,12 @@ export default function AboutPage() {
             domestic, we are your trusted partner for sustainable solutions.
           </p>
           <button className="px-8 py-3 bg-blue-600 font-semibold rounded-full shadow hover:bg-blue-700 transition">
+            <a
+            href="https://wa.me/2348023444635?text=Hello%20Toemech%2C%20I%27d%20like%20to%20get%20a%20quote."
+              target="_blank"
+              rel="noopener noreferrer">
             Get in Touch
+            </a>
           </button>
         </motion.div>
       </section>
