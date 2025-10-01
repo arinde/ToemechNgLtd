@@ -2,23 +2,74 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { CheckCircle, Factory, Wrench, Zap, ShoppingCart } from "lucide-react";
+import {
+  CheckCircle,
+  Factory,
+  Wrench,
+  Zap,
+  ShoppingCart,
+  Cog,
+} from "lucide-react";
 
 export default function AboutPage() {
   return (
     <div className="bg-white text-gray-800">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-gray-900 to-gray-800 text-white py-28 px-6 text-center">
+      {/* Hero Section with Floating Icons */}
+      <section className="relative bg-gradient-to-r from-gray-900 to-gray-800 text-white py-28 px-6 text-center overflow-hidden">
+        {/* Floating Background Icons */}
+        <div className="absolute inset-0 z-0">
+          <motion.div
+            animate={{ y: [0, -20, 0], x: [0, 15, 0], rotate: [0, 10, -10, 0] }}
+            transition={{ repeat: Infinity, duration: 6 }}
+            className="absolute top-10 left-10 text-blue-400 opacity-20"
+          >
+            <Wrench size={60} />
+          </motion.div>
+
+          <motion.div
+            animate={{ y: [0, 15, 0], x: [0, -20, 0], rotate: [0, -15, 15, 0] }}
+            transition={{ repeat: Infinity, duration: 7 }}
+            className="absolute top-32 right-16 text-yellow-400 opacity-20"
+          >
+            <Zap size={55} />
+          </motion.div>
+
+          <motion.div
+            animate={{ y: [0, -25, 0], x: [0, 25, 0], rotate: [0, 12, -12, 0] }}
+            transition={{ repeat: Infinity, duration: 8 }}
+            className="absolute bottom-20 left-1/4 text-green-400 opacity-20"
+          >
+            <Factory size={65} />
+          </motion.div>
+
+          <motion.div
+            animate={{ y: [0, 15, 0], x: [0, -20, 0], rotate: [0, -15, 15, 0] }}
+            transition={{ repeat: Infinity, duration: 7 }}
+            className="absolute top-32 right-44 text-yellow-400 opacity-20"
+          >
+            <Zap size={55} />
+          </motion.div>
+
+          <motion.div
+            animate={{ y: [0, 20, 0], x: [0, -15, 0], rotate: [0, -10, 10, 0] }}
+            transition={{ repeat: Infinity, duration: 9 }}
+            className="absolute bottom-10 right-1/3 text-purple-400 opacity-20"
+          >
+            <Cog size={50} />
+          </motion.div>
+        </div>
+
+        {/* Motto Text */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="max-w-4xl mx-auto"
+          className="relative z-10 max-w-4xl mx-auto"
         >
           <h1 className="text-4xl md:text-6xl font-bold mb-4 mt-16">
             About Toemech Nigeria Limited
           </h1>
-          <p className="text-lg md:text-xl italic font-light">
+          <p className="text-lg md:text-2xl italic font-light text-blue-100 drop-shadow-lg">
             Powering Progress and Engineering Excellence
           </p>
         </motion.div>
@@ -215,10 +266,11 @@ export default function AboutPage() {
           </p>
           <button className="px-8 py-3 bg-blue-600 font-semibold rounded-full shadow hover:bg-blue-700 transition">
             <a
-            href="https://wa.me/2348023444635?text=Hello%20Toemech%2C%20I%27d%20like%20to%20get%20a%20quote."
+              href="https://wa.me/2348023444635?text=Hello%20Toemech%2C%20I%27d%20like%20to%20get%20a%20quote."
               target="_blank"
-              rel="noopener noreferrer">
-            Get in Touch
+              rel="noopener noreferrer"
+            >
+              Get in Touch
             </a>
           </button>
         </motion.div>

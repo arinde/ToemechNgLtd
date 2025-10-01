@@ -20,6 +20,7 @@ export const metadata: Metadata = {
   keywords: [
     "engineering company in Nigeria",
     "Electrica; engineering company in Nigeria",
+    "Electrica; engineering company in agbara",
     "Electrical engineering services",
     "Mechanical engineering services",
     "industrial automation Nigeria",
@@ -27,12 +28,13 @@ export const metadata: Metadata = {
     "CCTV installation Nigeria",
     "engineering contractors Lagos",
     "engineering contractors Ogun",
-    "engineering sales Nigeria"
+    "engineering sales Nigeria",
+    "Electrial and mechanical Consultancy Nigeria"
   ],
   openGraph: {
     title: "Toemech Nigeria Ltd | Engineering & Industrial Solutions",
     description:
-      "Leading engineering company in Nigeria. We provide industrial Electrical and Mechanical engineering solutions, construction, automation, and CCTV solutions.",
+      "Leading engineering company in Nigeria. We provide industrial Electrical and Mechanical engineering solutions, construction, automation, and CCTV solutions. Experts in industrial automation, power systems, and engineering consultancy.",
     url: "https://www.toemechngltd.com",
     siteName: "Toemech Nigeria Ltd",
     images: [

@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function AboutSection() {
   return (
@@ -40,38 +41,57 @@ export default function AboutSection() {
 
         {/* Right Side - Image Collage */}
         <div className="grid grid-cols-2 gap-4">
-          <div className="relative w-full h-56 md:h-64 rounded-lg overflow-hidden shadow-md">
+          <motion.div
+            className="relative w-full h-56 md:h-64 rounded-lg overflow-hidden shadow-md"
+            animate={{ y: [0, -15, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          >
             <Image
               src="/toemech7.jpeg"
               alt="Industrial Engineering"
               fill
               className="object-cover"
             />
-          </div>
-          <div className="relative w-full h-72 md:h-80 rounded-lg overflow-hidden shadow-md">
+          </motion.div>
+
+          <motion.div
+            className="relative w-full h-72 md:h-80 rounded-lg overflow-hidden shadow-md"
+            animate={{ y: [0, -20, 0] }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+          >
             <Image
               src="/toemech9.jpeg"
               alt="Electrical Works"
               fill
               className="object-cover"
             />
-          </div>
-          <div className="relative w-full h-72 md:h-80 rounded-lg overflow-hidden shadow-md">
+          </motion.div>
+
+          <motion.div
+            className="relative w-full h-72 md:h-80 rounded-lg overflow-hidden shadow-md"
+            animate={{ y: [0, -18, 0] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
+          >
             <Image
-              src="/toemech6.jpeg"
+              src="/toemech5.jpg"
               alt="Engineering Team"
               fill
               className="object-cover"
             />
-          </div>
-          <div className="relative w-full h-56 md:h-64 rounded-lg overflow-hidden shadow-md">
+          </motion.div>
+
+          <motion.div
+            className="relative w-full h-56 md:h-64 rounded-lg overflow-hidden shadow-md"
+            animate={{ y: [0, -12, 0] }}
+            transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: 0.9 }}
+          >
             <Image
               src="/toemech4.jpeg"
               alt="Engineering Materials"
               fill
               className="object-cover"
             />
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
