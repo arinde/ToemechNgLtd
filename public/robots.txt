@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.toemechngltd.com
+
+# Sitemaps
+Sitemap: https://www.toemechngltd.com/sitemap.xml

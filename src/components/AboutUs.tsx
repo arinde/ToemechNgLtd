@@ -1,5 +1,5 @@
 "use client";
-
+import Link from "next/link";
 import Image from "next/image";
 
 export default function AboutSection() {
@@ -30,12 +30,12 @@ export default function AboutSection() {
             industries, support businesses, and enhance homes — all without compromising 
             quality and safety.
           </p>
-          <a
-            href="#"
+          <Link
+            href="/about"
             className="inline-block border border-gray-700 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 hover:text-white transition"
           >
             Learn More →
-          </a>
+          </Link>
         </div>
 
         {/* Right Side - Image Collage */}

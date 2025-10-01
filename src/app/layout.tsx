@@ -9,8 +9,45 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Toemech Nigeria Ltd",
-  description: "Toemech Nigeria Ltd is a leading provider of innovative engineering solutions.",
+  title: "Toemech Nigeria Ltd | Engineering & Industrial Solutions in Nigeria",
+  description:
+    "Toemech Nigeria Ltd is a trusted engineering company in Nigeria delivering innovative Electrical, Mechanical engineering, construction, industrial automation, and CCTV installation services for businesses and governments.",
+  keywords: [
+    "engineering company in Nigeria",
+    "Electrica; engineering company in Nigeria",
+    "Electrical engineering services",
+    "Mechanical engineering services",
+    "industrial automation Nigeria",
+    "construction solutions Nigeria",
+    "CCTV installation Nigeria",
+    "engineering contractors Lagos",
+    "engineering contractors Ogun",
+    "engineering sales Nigeria"
+  ],
+  openGraph: {
+    title: "Toemech Nigeria Ltd | Engineering & Industrial Solutions",
+    description:
+      "Leading engineering company in Nigeria. We provide industrial Electrical and Mechanical engineering solutions, construction, automation, and CCTV solutions.",
+    url: "https://www.toemechngltd.com",
+    siteName: "Toemech Nigeria Ltd",
+    images: [
+      {
+        url: "https://www.toemechngltd.com/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Toemech Nigeria Ltd",
+      },
+    ],
+    locale: "en_NG",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Toemech Nigeria Ltd | Engineering & Industrial Solutions",
+    description:
+      "Trusted engineering company in Nigeria delivering civil engineering, construction, and CCTV solutions.",
+    images: ["https://www.toemechngltd.com/og-image.jpg"],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -18,7 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <AuthProvider>
-          <ClientLayout>{children}</ClientLayout> {/* ✅ put conditional logic here */}
+          <ClientLayout>{children}</ClientLayout>
           <Toaster position="top-right" reverseOrder={false} />
         </AuthProvider>
       </body>
