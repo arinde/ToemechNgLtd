@@ -71,7 +71,7 @@ const TeamSection: React.FC = () => {
   const displayedEmployees = employees.slice(0, 4);
 
   return (
-    <section id='team'>
+    <section id='team' className='bg-gray-50'>
     <div className="container mx-auto px-4 py-12 ">
       <div className="text-center mb-12">
         <h2 className="text-3xl font-bold font-serif text-blue-600 mb-2">Meet The Team</h2>

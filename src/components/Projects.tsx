@@ -46,7 +46,7 @@ export default function Project() {
   }, []);
 
   return (
-    <section className="py-12 px-4">
+    <section className="py-12 px-4 bg-gray-50">
       <div>
         <h2 className="text-4xl font-bold text-center font-serif text-grey-800">Projects</h2>
         <p className="text-center text-gray-600 mt-2">
