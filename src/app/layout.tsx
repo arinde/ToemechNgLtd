@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   description:
     "Toemech Nigeria Ltd is a trusted engineering company in Nigeria delivering innovative Electrical, Mechanical engineering, construction, industrial automation, and CCTV installation services for businesses and governments.",
   icons: {
-  icon: "/favicon.ico",
+  icon: "/Logo.png",
   shortcut: "/Logo.png",
   apple: "/Logo.png",
   },
