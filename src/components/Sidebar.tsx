@@ -16,18 +16,27 @@ type SidebarProps = {
 };
 
 export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
-  const [isOpen, setIsOpen] = useState(true); // ✅ Start open on desktop
+  const [isOpen, setIsOpen] = useState(false); // ⛔️ Start CLOSED always
   const [isMobile, setIsMobile] = useState(false);
 
   // ✅ Detect screen size
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    const checkMobile = () => {
+      if (window.innerWidth < 768) {
+        setIsMobile(true);
+        setIsOpen(false); // closed by default on mobile
+      } else {
+        setIsMobile(false);
+        setIsOpen(true); // open by default on desktop
+      }
+    };
+
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // ✅ Animate sidebar on mobile
+  // ✅ Animate sidebar only on mobile
   useEffect(() => {
     if (isMobile) {
       gsap.to(".sidebar-panel", {
@@ -58,7 +67,7 @@ export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
           onClick={() => setIsOpen((p) => !p)}
           aria-label="Toggle sidebar"
           className={`fixed top-4 z-50 p-1 rounded-md shadow-md transition-all duration-300
-            ${isOpen ? "left-60 bg-red-600 hover:bg-red-700" : "left-4 bg-gray-50 hover:bg-gray-900"}`}
+            ${isOpen ? "left-60 bg-red-600 hover:bg-red-700" : "left-4 bg-gray-50 hover:bg-gray-200"}`}
         >
           {isOpen ? <X className="w-5 h-5 text-white" /> : <Menu className="w-8 h-8 text-blue-600" />}
         </button>
@@ -69,15 +78,10 @@ export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
         className={`sidebar-panel fixed top-0 left-0 h-screen w-60 bg-white border-r border-gray-200 shadow-xl
         flex flex-col px-4 py-6 z-40 transform md:translate-x-0`}
       >
-        {/* 🏢 Logo Placeholder */}
+        {/* Logo */}
         <div className="h-16 flex items-center justify-center border-b border-gray-200 mb-6">
-           <Link href="/">
-            <Image
-              src="/Logo.png"
-              alt="toemech"
-              width={72}
-              height={72}
-            />
+          <Link href="/">
+            <Image src="/Logo.png" alt="toemech" width={72} height={72} />
           </Link>
         </div>
 
@@ -92,7 +96,7 @@ export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
               isActive={activeTab === key}
               onClick={() => {
                 setActiveTab(key as TabType);
-                if (isMobile) setIsOpen(false); // close sidebar on mobile
+                if (isMobile) setIsOpen(false); // close sidebar on mobile after click
               }}
             />
           ))}
@@ -111,7 +115,7 @@ export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
   );
 }
 
-/* 🔗 Sidebar Link Component */
+/* 🔗 Sidebar Link */
 function SidebarLink({
   icon,
   label,
