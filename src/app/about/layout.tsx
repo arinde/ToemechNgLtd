@@ -27,7 +27,7 @@ export const metadata = {
     url: "https://www.toemechngltd.com/about",
     images: [
       {
-        url: "https://www.toemechngltd.com/about-og.jpg",
+        url: "/Logo.png",
         width: 1200,
         height: 630,
         alt: "About Toemech Nigeria Ltd",

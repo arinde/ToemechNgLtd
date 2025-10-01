@@ -12,6 +12,11 @@ export const metadata: Metadata = {
   title: "Toemech Nigeria Ltd | Engineering & Industrial Solutions in Nigeria",
   description:
     "Toemech Nigeria Ltd is a trusted engineering company in Nigeria delivering innovative Electrical, Mechanical engineering, construction, industrial automation, and CCTV installation services for businesses and governments.",
+  icons: {
+  icon: "/favicon.ico",
+  shortcut: "/Logo.png",
+  apple: "/Logo.png",
+  },
   keywords: [
     "engineering company in Nigeria",
     "Electrica; engineering company in Nigeria",
@@ -32,7 +37,7 @@ export const metadata: Metadata = {
     siteName: "Toemech Nigeria Ltd",
     images: [
       {
-        url: "https://www.toemechngltd.com/og-image.jpg",
+        url: "/Logo.png",
         width: 1200,
         height: 630,
         alt: "Toemech Nigeria Ltd",
@@ -46,7 +51,7 @@ export const metadata: Metadata = {
     title: "Toemech Nigeria Ltd | Engineering & Industrial Solutions",
     description:
       "Trusted engineering company in Nigeria delivering civil engineering, construction, and CCTV solutions.",
-    images: ["https://www.toemechngltd.com/og-image.jpg"],
+    images: ["/Logo.png"],
   },
 };
 

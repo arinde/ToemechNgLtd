@@ -1,157 +1,196 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { Building2, Users, Cog, Bolt, Package, ShieldCheck } from "lucide-react";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { CheckCircle, Factory, Wrench, Zap, ShoppingCart } from "lucide-react";
 
 export default function AboutPage() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (sectionRef.current) {
-      gsap.fromTo(
-        sectionRef.current.querySelectorAll(".fade-in"),
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: "power3.out" }
-      );
-    }
-  }, []);
-
   return (
-    <div ref={sectionRef} className="bg-white text-gray-800">
+    <div className="bg-white text-gray-800 ">
       {/* Hero Section */}
-      <section className="relative w-full bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white py-20 px-6 lg:px-20">
-        <div className="max-w-5xl mx-auto text-center">
-          <h1 className="fade-in text-4xl lg:text-6xl font-extrabold mb-6">
-            Powering Progress. Engineering Excellence.
+      <section className="relative bg-gradient-to-r from-gray-900 to-gray-800 text-white py-28 px-6 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="max-w-4xl mx-auto"
+        >
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 mt-16">
+            About Toemech Nigeria Limited
           </h1>
-          <p className="fade-in text-lg lg:text-xl text-gray-300 mb-8">
-            Toemech Nigeria Limited (RC: 480129) delivers trusted{" "}
-            <span className="font-semibold text-white">
-              mechanical & electrical engineering
-            </span>{" "}
-            solutions for industries and homes. Established in 2003 by{" "}
-            <strong>Engr. Titus Towoju</strong>, COREN-certified engineer and
-            Fellow of NATE.
+          <p className="text-lg md:text-xl italic font-light">
+            Powering Progress and Engineering Excellence
           </p>
-          <div className="fade-in flex flex-wrap justify-center gap-4">
-            <button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-2xl shadow-lg font-semibold transition">
-              Talk to Our Engineers
-            </button>
-            <button className="bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-2xl shadow-lg font-semibold transition">
-              Explore Services
-            </button>
+        </motion.div>
+      </section>
+
+      {/* Our Story with CEO */}
+      <section className="max-w-6xl mx-auto py-20 px-6 grid md:grid-cols-2 gap-12 items-center">
+        {/* Text */}
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h2 className="text-3xl font-bold mb-6 text-gray-900">Our Story</h2>
+          <p className="mb-4 leading-relaxed text-gray-700">
+            Toemech Nigeria Limited (RC: 480129) was established in 2003 by{" "}
+            <strong>Engr. Titus Towoju</strong>, a visionary who started his
+            career as a technician in 1992. With years of practical experience
+            across different companies, he pursued higher education and became a{" "}
+            <strong>COREN certified Engineer</strong> and a{" "}
+            <strong>Fellow of the Nigerian Association of Technologists in
+            Engineering (FNATE)</strong>.
+          </p>
+          <p className="leading-relaxed text-gray-700">
+            From humble beginnings, Toemech has grown into a leading force in{" "}
+            <strong>Mechanical & Electrical Engineering</strong>, serving both
+            industries and homes with innovative solutions, and employing over{" "}
+            <strong>50 dedicated professionals</strong>.
+          </p>
+        </motion.div>
+
+        {/* CEO Image */}
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          className="flex flex-col items-center"
+        >
+          <Image
+            src="/ceo.jpeg"
+            alt="Engr. Titus Towoju"
+            width={300}
+            height={80}
+            className="rounded-md shadow-xl object-cover"
+          />
+          <h3 className="mt-4 text-xl font-semibold">Engr. Titus Towoju</h3>
+          <p className="text-sm opacity-80">
+            Founder & CEO, COREN Certified, FNATE
+          </p>
+        </motion.div>
+      </section>
+
+      {/* What We Do */}
+      <section className="bg-gray-50 py-20 px-6">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold mb-12 text-center">What We Do</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+            <motion.div whileHover={{ y: -5 }} className="bg-white shadow-md rounded-xl p-6">
+              <Factory className="w-10 h-10 text-blue-600 mb-4" />
+              <h3 className="text-lg font-semibold mb-2">Industrial Engineering</h3>
+              <p className="text-sm leading-relaxed">
+                Design, installation, and maintenance of heavy-duty machines,
+                production lines, and power systems for industries across Nigeria.
+              </p>
+            </motion.div>
+
+            <motion.div whileHover={{ y: -5 }} className="bg-white shadow-md rounded-xl p-6">
+              <Zap className="w-10 h-10 text-yellow-600 mb-4" />
+              <h3 className="text-lg font-semibold mb-2">Electrical Solutions</h3>
+              <p className="text-sm leading-relaxed">
+                Power distribution, control panels, automation, and safety systems
+                for both industries and homes.
+              </p>
+            </motion.div>
+
+            <motion.div whileHover={{ y: -5 }} className="bg-white shadow-md rounded-xl p-6">
+              <Wrench className="w-10 h-10 text-green-600 mb-4" />
+              <h3 className="text-lg font-semibold mb-2">Mechanical Services</h3>
+              <p className="text-sm leading-relaxed">
+                HVAC, plumbing, fabrication, industrial piping, repairs, and
+                optimization of machinery.
+              </p>
+            </motion.div>
+
+            <motion.div whileHover={{ y: -5 }} className="bg-white shadow-md rounded-xl p-6">
+              <ShoppingCart className="w-10 h-10 text-purple-600 mb-4" />
+              <h3 className="text-lg font-semibold mb-2">Sales of Materials</h3>
+              <p className="text-sm leading-relaxed">
+                Supply of quality mechanical & electrical materials, tools, and
+                industrial spares for reliable operations.
+              </p>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Founder Story */}
-      <section className="py-16 px-6 lg:px-20 max-w-6xl mx-auto">
-        <h2 className="fade-in text-3xl lg:text-4xl font-bold mb-6 text-gray-900">
-          Our Story
-        </h2>
-        <p className="fade-in text-lg leading-relaxed text-gray-700 mb-6">
-          Founded in 2003, Toemech Nigeria Limited grew from the vision of{" "}
-          <strong>Engr. Titus Towoju</strong>, who began his career as a
-          technician in 1992. After years of field experience and furthering his
-          education, he became a{" "}
-          <span className="font-semibold">
-            COREN-certified Engineer and a Fellow of the Nigerian Association of
-            Technologists in Engineering (NATE)
-          </span>
-          . His expertise and passion for progress built the foundation of
-          Toemech — a company committed to delivering{" "}
-          <em>reliable, safe, and future-ready engineering solutions</em>.
-        </p>
-      </section>
-
-      {/* Services */}
-      <section className="bg-gray-50 py-16 px-6 lg:px-20">
-        <h2 className="fade-in text-3xl lg:text-4xl font-bold mb-12 text-center text-gray-900">
-          What We Do
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+      {/* Project Approach */}
+      <section className="max-w-6xl mx-auto py-20 px-6">
+        <h2 className="text-3xl font-bold mb-8 text-center">Our Project Approach</h2>
+        <div className="space-y-6 max-w-3xl mx-auto">
           {[
-            {
-              icon: Cog,
-              title: "Mechanical Engineering",
-              desc: "Industrial installations, plant maintenance, and machinery upgrades.",
-            },
-            {
-              icon: Bolt,
-              title: "Electrical Engineering",
-              desc: "Power systems, wiring, backup generators, and industrial electrical setups.",
-            },
-            {
-              icon: Package,
-              title: "Materials Supply",
-              desc: "High-quality mechanical & electrical materials for projects and operations.",
-            },
-          ].map((item, idx) => (
-            <div
-              key={idx}
-              className="fade-in bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition"
+            "Understanding client needs through consultation and site survey.",
+            "Designing tailored engineering solutions with cost efficiency.",
+            "Procuring only high-quality materials and equipment.",
+            "Expert installation, integration, and rigorous testing.",
+            "Ongoing monitoring, maintenance, and after-sales support.",
+          ].map((step, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.2 }}
+              className="flex items-start gap-3"
             >
-              <item.icon className="w-10 h-10 text-red-600 mb-4" />
-              <h3 className="text-xl font-semibold mb-2 text-gray-900">
-                {item.title}
-              </h3>
-              <p className="text-gray-600">{item.desc}</p>
-            </div>
+              <CheckCircle className="w-6 h-6 text-blue-700 flex-shrink-0" />
+              <p className="text-gray-700">{step}</p>
+            </motion.div>
           ))}
         </div>
       </section>
 
       {/* Clients */}
-      <section className="py-16 px-6 lg:px-20">
-        <h2 className="fade-in text-3xl lg:text-4xl font-bold mb-8 text-center text-gray-900">
-          Trusted By
-        </h2>
-        <p className="fade-in text-center text-lg text-gray-600 mb-10">
-          Over the years, we have partnered with leading companies across
-          Nigeria, including:
+      <section className="bg-gray-100 py-20 px-6 text-center">
+        <h2 className="text-3xl font-bold mb-8">Our Clients</h2>
+        <p className="max-w-3xl mx-auto mb-10 text-gray-700">
+          We are trusted partners to leading organizations across Nigeria.
         </p>
-        <div className="fade-in grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto text-gray-700 font-medium">
-          <span>Reliance Chemical Products Ltd (Agbara)</span>
-          <span>Sil Chemicals (Agbara)</span>
-          <span>StrongPack Industries (Agbara)</span>
-          <span>Flexi Pack (Agbara)</span>
-          <span>Alucan (Agbara)</span>
-          <span>PTML</span>
-        </div>
-      </section>
-
-      {/* Stats */}
-      <section className="bg-gray-900 text-white py-16 px-6 lg:px-20">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 max-w-6xl mx-auto text-center">
+        <div className="grid md:grid-cols-3 gap-6">
           {[
-            { icon: Building2, label: "Founded", value: "2003" },
-            { icon: Users, label: "Team", value: "50+ Staff" },
-            { icon: ShieldCheck, label: "Clients", value: "6+ Major Partners" },
-            { icon: Cog, label: "Experience", value: "20+ Years" },
-          ].map((stat, idx) => (
-            <div key={idx} className="fade-in flex flex-col items-center">
-              <stat.icon className="w-10 h-10 text-red-500 mb-3" />
-              <p className="text-2xl font-bold">{stat.value}</p>
-              <p className="text-gray-300">{stat.label}</p>
-            </div>
+            "Reliance Chemical Products Limited (Agbara)",
+            "Sil Chemicals (Agbara)",
+            "Strongpack Industries (Agbara)",
+            "Flexi Pack (Agbara)",
+            "Alucan (Agbara)",
+            "PTML",
+          ].map((client, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ scale: 1.02 }}
+              className="bg-white rounded-lg shadow p-6"
+            >
+              {client}
+            </motion.div>
           ))}
         </div>
       </section>
 
-      {/* Call to Action */}
-      <section className="py-20 px-6 lg:px-20 text-center">
-        <h2 className="fade-in text-3xl lg:text-4xl font-bold mb-6 text-gray-900">
-          Ready to Power Your Next Project?
-        </h2>
-        <p className="fade-in text-lg text-gray-600 mb-8">
-          From industrial plants to residential systems, Toemech delivers
-          engineering solutions that last. Let’s work together to build the
-          future.
-        </p>
-        <button className="fade-in bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-2xl shadow-lg font-semibold transition">
-          Get a Project Quote
-        </button>
+      {/* Partner With Us */}
+      <section className="relative py-32 px-6 text-center text-white">
+        <Image
+          src="/toemech10.jpeg"
+          alt="Engineering Background"
+          fill
+          className="absolute inset-0 object-cover z-0"
+        />
+        <div className="absolute inset-0 bg-black/60 z-0"></div>
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="relative z-10 max-w-3xl mx-auto"
+        >
+          <h2 className="text-3xl font-bold mb-4">Partner With Us</h2>
+          <p className="mb-8 leading-relaxed">
+            At Toemech Nigeria Limited, we combine experience, innovation, and
+            dedication to deliver engineering excellence. Whether industrial or
+            domestic, we are your trusted partner for sustainable solutions.
+          </p>
+          <button className="px-8 py-3 bg-blue-600 font-semibold rounded-full shadow hover:bg-blue-700 transition">
+            Get in Touch
+          </button>
+        </motion.div>
       </section>
     </div>
   );

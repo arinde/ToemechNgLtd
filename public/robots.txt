@@ -1,9 +1,14 @@
-# *
+# robots.txt for https://www.toemechngltd.com
+
 User-agent: *
 Allow: /
 
-# Host
-Host: https://www.toemechngltd.com
+# ❌ Block private/admin pages
+Disallow: /dashboard
+Disallow: /login
+Disallow: /staffReg
+Disallow: /admin
+Disallow: /api/
 
-# Sitemaps
+# ✅ Point bots to sitemap
 Sitemap: https://www.toemechngltd.com/sitemap.xml
